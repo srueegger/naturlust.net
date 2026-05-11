@@ -1,0 +1,81 @@
+# ------------------------------------------------------------------
+# Naturlust.net – Git ignore rules
+#
+# Strategy: WordPress Core and third-party packages are NOT versioned.
+# Only project-owned code (custom theme, custom plugins), design
+# assets, and the DDEV project configuration live in this repository.
+# Reproduce the runtime with `ddev start && ddev wp core download …`
+# (see README.md).
+# ------------------------------------------------------------------
+
+# ---- OS / Editors ----
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.sublime-*
+
+# ---- Logs / Temp ----
+*.log
+*.tmp
+*.cache
+node_modules/
+
+# ---- DDEV ----
+# DDEV manages its own .gitignore inside .ddev/ — keep config.yaml,
+# ignore generated artefacts.
+.ddev/db_snapshots/
+.ddev/import-db/
+.ddev/import-files/
+.ddev/.global_commands/
+.ddev/.homeadditions/
+.ddev/.webimageBuild/
+.ddev/.dbimageBuild/
+
+# ---- WordPress Core ----
+# Core files are downloaded via `ddev wp core download` and must not
+# be committed.
+/public/wp-admin/
+/public/wp-includes/
+/public/index.php
+/public/license.txt
+/public/readme.html
+/public/wp-*.php
+/public/xmlrpc.php
+/public/.htaccess
+/public/.user.ini
+
+# wp-config: secrets must never be committed. The DDEV-managed
+# include lives at /public/wp-config-ddev.php and is also excluded.
+/public/wp-config.php
+/public/wp-config-ddev.php
+
+# ---- wp-content: only project-owned subtrees are tracked ----
+/public/wp-content/index.php
+/public/wp-content/languages/
+/public/wp-content/uploads/
+/public/wp-content/upgrade/
+/public/wp-content/cache/
+/public/wp-content/backup-db/
+/public/wp-content/advanced-cache.php
+/public/wp-content/wp-cache-config.php
+/public/wp-content/db.php
+/public/wp-content/object-cache.php
+/public/wp-content/debug.log
+
+# Ignore everything in themes & plugins, then re-include our own.
+/public/wp-content/themes/*
+!/public/wp-content/themes/naturlust/
+
+/public/wp-content/plugins/*
+!/public/wp-content/plugins/naturlust-*/
+
+# Default mu-plugins folder is empty – keep it tracked only if we add
+# our own must-use plugins later.
+/public/wp-content/mu-plugins/
+
+# ---- Build artefacts ----
+/public/wp-content/themes/naturlust/dist/
+/public/wp-content/themes/naturlust/build/
