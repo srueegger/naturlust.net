@@ -1,0 +1,104 @@
+/* ------------------------------------------------------------------ */
+/*  Naturlust – globales Theme-CSS                                     */
+/*                                                                     */
+/*  Design-Token (Farben, Schriftgrößen, Spacing) liegen in            */
+/*  theme.json. Diese Datei enthält ausschließlich Sonderfälle, die    */
+/*  sich nicht sauber in theme.json abbilden lassen (z. B. Hover-      */
+/*  Effekte auf eigenen Mustern, Hintergrund-Layering).                */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --naturlust-map-stroke: rgba(31, 42, 35, 0.18);
+}
+
+body {
+  background-color: var(--wp--preset--color--paper);
+  background-image:
+    linear-gradient(rgba(247, 241, 227, 0.55), rgba(247, 241, 227, 0.85)),
+    url(../images/brand/map-background.jpg);
+  background-size: auto, cover;
+  background-position: center top, center top;
+  background-attachment: fixed, fixed;
+  background-repeat: no-repeat, no-repeat;
+}
+
+@media (max-width: 800px) {
+  body {
+    background-attachment: scroll, scroll;
+  }
+}
+
+/* --- Kategorie-Kachel-Buttons auf der Startseite --- */
+
+.naturlust-category-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: end;
+}
+
+.naturlust-category-tiles__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 200ms ease;
+}
+
+.naturlust-category-tiles__item:hover,
+.naturlust-category-tiles__item:focus-visible {
+  transform: translateY(-4px);
+}
+
+.naturlust-category-tiles__image {
+  width: 100%;
+  max-width: 180px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(31, 42, 35, 0.18);
+  background-color: var(--wp--preset--color--paper-shadow);
+}
+
+.naturlust-category-tiles__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.naturlust-category-tiles__label {
+  margin-top: 0.75rem;
+  font-family: var(--wp--preset--font-family--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+@media (max-width: 800px) {
+  .naturlust-category-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+/* --- Footer-Silhouette --- */
+
+.naturlust-footer {
+  position: relative;
+  margin-top: clamp(3rem, 6vw, 6rem);
+  padding-top: clamp(4rem, 8vw, 8rem);
+  background-color: var(--wp--preset--color--ink);
+  color: var(--wp--preset--color--paper);
+}
+
+.naturlust-footer::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 100% 0;
+  height: clamp(80px, 9vw, 140px);
+  background: url(../images/brand/footer-silhouette.png) center bottom / cover no-repeat;
+  pointer-events: none;
+  transform: translateY(1px);
+}

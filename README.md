@@ -31,7 +31,7 @@ der Live-Site übernimmt.
 | Live-Site         | <https://naturlust.net>                                    |
 | Lokale URL        | <https://naturlust.ddev.site>                              |
 | Inhaltliche Säulen | Wandern, Radfahren, Fotografieren, Waldbaden              |
-| Status            | Greenfield-Entwicklung – Theme im Aufbau                   |
+| Status            | Theme-Skelett produktiv, Inhaltsimport in Vorbereitung     |
 
 Eine ausführliche Beschreibung der Designideen, Skizzen und Renderings des
 Auftraggebers liegt unter [`ASSETS/`](ASSETS/).
@@ -57,6 +57,14 @@ Auftraggebers liegt unter [`ASSETS/`](ASSETS/).
 │   └── wp-content/
 │       ├── themes/
 │       │   └── naturlust/       # Projekt-Theme (versioniert)
+│       │       ├── style.css
+│       │       ├── theme.json
+│       │       ├── functions.php
+│       │       ├── templates/   # Block-Templates
+│       │       ├── parts/       # Header- und Footer-Parts
+│       │       ├── patterns/    # PHP-Block-Patterns
+│       │       ├── inc/         # PHP-Setup
+│       │       └── assets/      # CSS und web-optimierte Bilder
 │       └── plugins/
 │           └── naturlust-*/     # eigene Plugins, falls nötig
 ├── CLAUDE.md                    # Anleitung für Claude/Claude-Code

@@ -31,9 +31,19 @@ der bestehenden Live-Site übernommen.
 ## Verzeichnis-Landkarte
 
 - `ASSETS/` – Original-Skizzen, Renderings, Logos und Buttons vom
-  Auftraggeber. **Nur lesen, nichts verändern.**
+  Auftraggeber. **Nur lesen, nichts verändern.** Web-optimierte
+  Varianten liegen unter `…/themes/naturlust/assets/images/`.
 - `public/` – WordPress-Docroot.
-- `public/wp-content/themes/naturlust/` – Projekt-Theme (versioniert).
+- `public/wp-content/themes/naturlust/` – Projekt-Theme.
+  - `style.css`, `theme.json`, `functions.php`
+  - `templates/` – Block-Templates (index, front-page, single, page,
+    archive, search, 404)
+  - `parts/` – Template-Parts (header, footer)
+  - `patterns/` – PHP-Patterns (front-hero, category-tiles,
+    footer-copy)
+  - `inc/` – PHP-Setup (setup, assets, shortcodes)
+  - `assets/css/theme.css` – globales Frontend-CSS
+  - `assets/images/` – web-optimierte Theme-Bilder
 - `public/wp-content/plugins/naturlust-*/` – ggf. eigene Plugins
   (versioniert, sobald angelegt).
 - `.ddev/` – DDEV-Konfiguration (versioniert, ohne Cache-Verzeichnisse).
@@ -69,6 +79,15 @@ arbeiten.
   `inc/` (PHP-Registrierung) abgelegt, sobald sie gebraucht werden.
 - `functions.php` bleibt schlank: lediglich Theme-Setup und Includes
   aus `inc/`.
+- Dynamische Inhalte (Jahreszahl, Kategorie-Kacheln) werden als
+  PHP-Patterns unter `patterns/` umgesetzt und über
+  `<!-- wp:pattern {"slug":"naturlust/…"} /-->` eingebunden.
+- Pattern-Cache: WordPress cached Theme-Patterns pro Stylesheet-
+  Version. Bei Änderungen an einer Datei in `patterns/` im laufenden
+  Frontend bitte einmal flushen:
+  `ddev wp eval 'wp_get_theme()->delete_pattern_cache();'`.
+  Im Backend (`/wp-admin`) wird der Cache bei aktivem `WP_DEBUG`
+  automatisch verworfen.
 
 ### Inhalte aus der Live-Site
 

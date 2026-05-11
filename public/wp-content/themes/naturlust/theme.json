@@ -1,0 +1,165 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "useRootPaddingAwareAlignments": true,
+    "layout": {
+      "contentSize": "720px",
+      "wideSize": "1200px"
+    },
+    "spacing": {
+      "spacingScale": {
+        "operator": "*",
+        "increment": 1.5,
+        "steps": 8,
+        "mediumStep": 1.5,
+        "unit": "rem"
+      },
+      "units": ["px", "em", "rem", "%", "vh", "vw"]
+    },
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true,
+      "custom": true,
+      "customGradient": true,
+      "defaultPalette": false,
+      "defaultGradients": false,
+      "palette": [
+        { "slug": "paper",        "color": "#f7f1e3", "name": "Pergament" },
+        { "slug": "paper-shadow", "color": "#ebe1c8", "name": "Pergament Schatten" },
+        { "slug": "ink",          "color": "#1f2a23", "name": "Tinte" },
+        { "slug": "ink-soft",     "color": "#3d4a3f", "name": "Tinte weich" },
+        { "slug": "forest",       "color": "#2c4a2f", "name": "Tannengrün" },
+        { "slug": "forest-deep",  "color": "#1a2f1d", "name": "Tannengrün dunkel" },
+        { "slug": "lake",         "color": "#7aa7c7", "name": "Bergsee" },
+        { "slug": "sky",          "color": "#cfe2ed", "name": "Himmel" },
+        { "slug": "berry",        "color": "#8b3a3a", "name": "Beerenrot" },
+        { "slug": "sand",         "color": "#d9c79a", "name": "Sand" }
+      ]
+    },
+    "typography": {
+      "fluid": true,
+      "fontFamilies": [
+        {
+          "slug": "sans",
+          "name": "Sans",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+        },
+        {
+          "slug": "serif",
+          "name": "Serif",
+          "fontFamily": "'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif"
+        },
+        {
+          "slug": "hand",
+          "name": "Handschrift",
+          "fontFamily": "'Marker Felt', 'Bradley Hand', 'Comic Sans MS', cursive"
+        }
+      ],
+      "fontSizes": [
+        { "slug": "small",  "size": "0.9rem",                                   "name": "Klein"  },
+        { "slug": "medium", "size": "1rem",                                     "name": "Normal" },
+        { "slug": "large",  "size": "clamp(1.25rem, 1rem + 0.6vw, 1.6rem)",     "name": "Gross"  },
+        { "slug": "x-large","size": "clamp(1.8rem, 1.2rem + 2.4vw, 3rem)",      "name": "Riesig" },
+        { "slug": "xx-large","size": "clamp(2.6rem, 1.4rem + 4vw, 5rem)",       "name": "Hero"   }
+      ]
+    },
+    "border": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var(--wp--preset--color--paper)",
+      "text": "var(--wp--preset--color--ink)"
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--sans)",
+      "fontSize": "var(--wp--preset--font-size--medium)",
+      "lineHeight": "1.6"
+    },
+    "spacing": {
+      "padding": {
+        "top": "0",
+        "right": "var(--wp--preset--spacing--40)",
+        "bottom": "0",
+        "left": "var(--wp--preset--spacing--40)"
+      }
+    },
+    "elements": {
+      "link": {
+        "color": { "text": "var(--wp--preset--color--forest)" },
+        ":hover": { "color": { "text": "var(--wp--preset--color--forest-deep)" } }
+      },
+      "h1": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--serif)",
+          "fontSize": "var(--wp--preset--font-size--xx-large)",
+          "fontWeight": "600",
+          "lineHeight": "1.1",
+          "letterSpacing": "-0.01em"
+        }
+      },
+      "h2": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--serif)",
+          "fontSize": "var(--wp--preset--font-size--x-large)",
+          "fontWeight": "600",
+          "lineHeight": "1.2"
+        }
+      },
+      "h3": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--serif)",
+          "fontSize": "var(--wp--preset--font-size--large)",
+          "fontWeight": "600",
+          "lineHeight": "1.3"
+        }
+      },
+      "button": {
+        "color": {
+          "background": "var(--wp--preset--color--forest)",
+          "text": "var(--wp--preset--color--paper)"
+        },
+        ":hover": {
+          "color": {
+            "background": "var(--wp--preset--color--forest-deep)",
+            "text": "var(--wp--preset--color--paper)"
+          }
+        },
+        "border": { "radius": "999px" },
+        "spacing": { "padding": { "top": "0.6rem", "right": "1.4rem", "bottom": "0.6rem", "left": "1.4rem" } },
+        "typography": { "fontWeight": "600" }
+      }
+    },
+    "blocks": {
+      "core/site-title": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--serif)",
+          "fontSize": "var(--wp--preset--font-size--large)",
+          "fontWeight": "600"
+        }
+      },
+      "core/post-title": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--serif)",
+          "fontSize": "var(--wp--preset--font-size--x-large)",
+          "fontWeight": "600",
+          "lineHeight": "1.2"
+        }
+      }
+    }
+  },
+  "templateParts": [
+    { "name": "header", "title": "Kopfbereich", "area": "header" },
+    { "name": "footer", "title": "Fussbereich", "area": "footer" }
+  ],
+  "customTemplates": [
+    { "name": "front-page", "title": "Startseite (Naturlust)", "postTypes": ["page"] }
+  ]
+}
