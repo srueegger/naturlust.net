@@ -31,7 +31,7 @@ der Live-Site übernimmt.
 | Live-Site         | <https://naturlust.net>                                    |
 | Lokale URL        | <https://naturlust.ddev.site>                              |
 | Inhaltliche Säulen | Wandern, Radfahren, Fotografieren, Waldbaden              |
-| Status            | Theme-Skelett produktiv, Inhaltsimport in Vorbereitung     |
+| Status            | Theme produktiv, Demo-Inhalte aktiv, Live-Import pausiert  |
 
 Eine ausführliche Beschreibung der Designideen, Skizzen und Renderings des
 Auftraggebers liegt unter [`ASSETS/`](ASSETS/).
@@ -135,15 +135,42 @@ Diese Zugangsdaten gelten ausschliesslich lokal und niemals produktiv.
 
 Die bestehende Seite läuft selbst auf WordPress und stellt die REST-API
 unter <https://naturlust.net/wp-json/> bereit. Beiträge, Seiten,
-Kategorien und Medien werden darüber in die lokale Installation
-übernommen. Der Import wird im Theme- bzw. CLI-Workflow noch detailliert
-dokumentiert; relevante Endpunkte sind:
+Kategorien, Tags und Medien werden über das eigene Plugin
+[`naturlust-importer`](public/wp-content/plugins/naturlust-importer/)
+in die lokale Installation gespiegelt. Der Import läuft idempotent über
+Origin-IDs (`_naturlust_origin_id`).
+
+```bash
+# Plugin aktivieren (einmalig)
+ddev wp plugin activate naturlust-importer
+
+# Komplett-Import von der Standardquelle
+ddev wp naturlust import
+
+# Oder phasenweise (empfohlen wegen Speicher beim Medien-Sideload)
+ddev wp naturlust import --only=terms
+ddev wp naturlust import --only=media
+ddev wp naturlust import --only=posts
+ddev wp naturlust import --only=pages
+
+# Bestand prüfen
+ddev wp naturlust status
+```
+
+Relevante REST-Endpunkte:
 
 - `/wp/v2/posts`
 - `/wp/v2/pages`
 - `/wp/v2/categories`
 - `/wp/v2/tags`
 - `/wp/v2/media`
+
+**Aktueller Stand:** Der Live-Hoster blockiert Anfragen aus dem
+Entwicklungsnetz (`Connection refused` auf 185.30.32.111:443). Lokal
+arbeiten wir deshalb mit Demo-Beiträgen und Demo-Seiten, das Plugin
+bleibt installiert, aber deaktiviert. Sobald die Verbindung wieder
+freigegeben ist, lässt sich der reale Import wie oben beschrieben
+starten.
 
 ## Design-Vorgaben
 

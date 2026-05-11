@@ -92,9 +92,22 @@ arbeiten.
 ### Inhalte aus der Live-Site
 
 - Quelle ist die öffentliche REST-API: <https://naturlust.net/wp-json/>.
-- Beiträge, Seiten, Kategorien, Tags und Medien werden importiert,
-  inklusive Beitragsbilder. Medien landen in der lokalen Mediathek
-  (`wp-content/uploads/`, nicht versioniert).
+- Importer-Plugin: [`public/wp-content/plugins/naturlust-importer/`](public/wp-content/plugins/naturlust-importer/).
+  Aktiviert das WP-CLI-Kommando `wp naturlust import [--only=…]`,
+  läuft idempotent über die Origin-IDs der Quell-Site und legt Medien
+  via `media_handle_sideload` lokal an.
+- Aktueller Status: Der Live-Hoster (webgo.de) blockt offenbar Anfragen
+  aus dem Entwicklungsnetz, deshalb arbeiten wir lokal mit Demo-
+  Inhalten. Plugin bleibt installiert, aber deaktiviert; sobald der
+  Hoster wieder erreichbar ist, lässt sich der Import phasenweise
+  starten:
+  ```bash
+  ddev wp plugin activate naturlust-importer
+  ddev wp naturlust import --only=terms
+  ddev wp naturlust import --only=media
+  ddev wp naturlust import --only=posts
+  ddev wp naturlust import --only=pages
+  ```
 - Beim Import gilt: IDs nicht erzwingen, stattdessen über Slug
   abgleichen, damit Mehrfach-Importe idempotent sind.
 
