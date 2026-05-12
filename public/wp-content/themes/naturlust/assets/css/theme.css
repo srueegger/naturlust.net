@@ -93,13 +93,108 @@ body {
 
 .naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open {
   background-color: var(--wp--preset--color--paper);
+  background-image:
+    linear-gradient(rgba(247, 241, 227, 0.6), rgba(247, 241, 227, 0.6)),
+    url(../images/brand/map-background.jpg);
+  background-size: cover, cover;
+  background-position: center, center;
+  background-attachment: scroll, scroll;
 }
 
+/* Overlay: flex column, center the nav items vertically */
+.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Close button area: pull out of flow so it doesn't push nav down */
+.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-close {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: auto !important;
+  pointer-events: none;
+}
+
+.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog {
+  pointer-events: auto;
+}
+
+/* Close button: top-right corner */
+.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close {
+  position: absolute !important;
+  top: clamp(0.9rem, 1.4vw, 1.4rem) !important;
+  right: var(--naturlust-page-padding) !important;
+  left: auto !important;
+  pointer-events: auto;
+}
+
+/* Nav items: centered column, the only flex child of the overlay */
 .naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container {
-  font-family: var(--wp--preset--font-family--serif);
-  font-size: clamp(1.4rem, 1rem + 1.5vw, 2rem);
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item {
+  width: auto;
+  text-align: center;
+}
+
+.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open a {
+  font-family: var(--wp--preset--font-family--serif);
+  font-size: clamp(1.6rem, 1.2rem + 2vw, 2.6rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--wp--preset--color--ink);
+  text-decoration: none !important;
+  opacity: 0.9;
+  transition: color 180ms ease, opacity 180ms ease;
+  display: block;
+  line-height: 1.2;
+}
+
+.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open a:hover,
+.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open a:focus-visible {
+  color: var(--wp--preset--color--forest);
+  opacity: 1;
+}
+
+/* Close button: top-right, ink-colored */
+.naturlust-hamburger .wp-block-navigation__responsive-container-close {
+  position: absolute;
+  top: clamp(0.9rem, 1.4vw, 1.4rem);
+  right: var(--naturlust-page-padding);
+  color: var(--wp--preset--color--ink);
+  background: transparent;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 150ms ease;
+}
+
+.naturlust-hamburger .wp-block-navigation__responsive-container-close:hover,
+.naturlust-hamburger .wp-block-navigation__responsive-container-close:focus-visible {
+  background: rgba(31, 42, 35, 0.08);
+}
+
+.naturlust-hamburger .wp-block-navigation__responsive-container-close svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
 }
 
 /* --- Site-Stempel: rundes Logo links neben dem Hero, schwebend ------ */
@@ -272,19 +367,28 @@ body {
 }
 
 .naturlust-footer__grid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: 1rem 2rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
   width: 100%;
 }
 
 .naturlust-footer__start {
-  justify-self: start;
-  padding-left: clamp(2rem, 12vw, 12rem);
+  margin-left: clamp(3rem, 30vw, 30rem); /* schiebt Nav in die dunkle Waldfläche */
+  flex-shrink: 0;
 }
 
-.naturlust-footer__end { justify-self: end; }
+.naturlust-footer__end {
+  margin-left: auto; /* Copyright an den rechten Rand */
+  flex-shrink: 0;
+  text-align: right;
+}
+
+/* Nav-Items im Footer immer einzeilig */
+.naturlust-footer .wp-block-navigation .wp-block-navigation__container {
+  flex-wrap: nowrap;
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+}
 
 .naturlust-footer .wp-block-navigation a {
   color: var(--wp--preset--color--paper);
