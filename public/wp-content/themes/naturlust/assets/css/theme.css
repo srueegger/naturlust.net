@@ -173,6 +173,7 @@ body {
   gap: clamp(1rem, 2vw, 2rem);
   align-items: center;
   width: min(92%, 900px);
+  max-width: 900px; /* hebt constrained-layout max-width:720px auf */
   margin: clamp(2.5rem, 5vw, 4rem) auto 0;
 }
 
