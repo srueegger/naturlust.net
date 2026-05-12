@@ -142,30 +142,31 @@ body {
   }
 }
 
-/* --- Footer: links Navigation, rechts Copyright --------------------- */
+/* --- Footer: Wald-Silhouette als Hintergrund, Text in den Bäumen ---- */
+/*                                                                     */
+/*  footer-silhouette.png ist eine breite Wald-Silhouette mit          */
+/*  transparenter Oberkante und schwarz gefüllter Unterkante. Wir      */
+/*  legen sie als Hintergrund oben auf den dunklen Footer, sodass die  */
+/*  Baumspitzen in den hellen Karten-Hintergrund hineinragen und der   */
+/*  Text unten rechts in der dunklen Wald-Fläche sitzt.                */
 
 .naturlust-footer {
   position: relative;
-  margin-top: clamp(3rem, 6vw, 6rem);
-  padding-top: clamp(4rem, 8vw, 8rem);
-  background-color: var(--wp--preset--color--ink);
+  margin-top: clamp(2rem, 4vw, 4rem);
+  padding-top: clamp(140px, 22vw, 320px);
+  padding-bottom: clamp(2rem, 3.5vw, 3rem);
+  background-color: #000;
+  background-image: url(../images/brand/footer-silhouette.png);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% auto;
   color: var(--wp--preset--color--paper);
-}
-
-.naturlust-footer::before {
-  content: "";
-  position: absolute;
-  inset: auto 0 100% 0;
-  height: clamp(80px, 9vw, 140px);
-  background: url(../images/brand/footer-silhouette.png) center bottom / cover no-repeat;
-  pointer-events: none;
-  transform: translateY(1px);
 }
 
 .naturlust-footer__grid {
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: center;
+  align-items: end;
   gap: 1.5rem;
   width: 100%;
 }
