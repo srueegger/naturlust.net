@@ -103,10 +103,18 @@ body {
 }
 
 /* --- Site-Stempel: rundes Logo links neben dem Hero, schwebend ------ */
+/*                                                                     */
+/*  position:relative auf dem post-content macht den Inhalt zur        */
+/*  containing block für den absolut positionierten Stempel.           */
+/*  Damit richtet sich top: spacing-20 exakt am Hero-margin-top aus.  */
+
+.entry-content.wp-block-post-content {
+  position: relative;
+}
 
 .naturlust-stamp {
   position: absolute;
-  top: clamp(3.5rem, 6vw, 7rem);
+  top: var(--wp--preset--spacing--20); /* gleicher Wert wie Hero margin-top */
   left: clamp(0.5rem, 2vw, 2.5rem);
   width: clamp(56px, 9vw, 130px);
   height: auto;
@@ -155,12 +163,15 @@ body {
 }
 
 /* --- Kategorie-Kachel-Buttons --------------------------------------- */
+/*                                                                     */
+/*  Fünf-Spalten-Raster: je 2 Kacheln links/rechts, kleines Logo in   */
+/*  der Mitte (Rendering zeigt einen kleinen Stempel-Kreis zentriert). */
 
 .naturlust-category-tiles {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(50px, 90px) repeat(2, minmax(0, 1fr));
   gap: clamp(1rem, 2vw, 2rem);
-  align-items: end;
+  align-items: center;
   width: min(92%, 900px);
   margin: clamp(2.5rem, 5vw, 4rem) auto 0;
 }
@@ -205,10 +216,28 @@ body {
   font-weight: 500;
 }
 
+.naturlust-category-tiles__center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.naturlust-category-tiles__center img {
+  width: 100%;
+  max-width: 70px;
+  height: auto;
+  display: block;
+  border-radius: 50%;
+  opacity: 0.75;
+}
+
 @media (max-width: 700px) {
   .naturlust-category-tiles {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem;
+  }
+  .naturlust-category-tiles__center {
+    display: none;
   }
 }
 
