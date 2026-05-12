@@ -1,13 +1,24 @@
-<!-- wp:group {"tagName":"header","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}},"layout":{"type":"constrained"}} -->
-<header class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--40)">
-	<!-- wp:group {"layout":{"type":"flex","justifyContent":"space-between","flexWrap":"nowrap"}} -->
-	<div class="wp-block-group">
+<!-- wp:group {"tagName":"header","align":"full","className":"naturlust-header","style":{"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|20","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}},"layout":{"type":"constrained"}} -->
+<header class="wp-block-group alignfull naturlust-header" style="padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--40)">
 
-		<!-- wp:navigation {"icon":"menu","overlayMenu":"always","overlayBackgroundColor":"paper","overlayTextColor":"ink","textColor":"ink","style":{"typography":{"fontFamily":"var:preset|font-family|serif"}}} /-->
+	<!-- wp:group {"className":"naturlust-header__grid","layout":{"type":"default"}} -->
+	<div class="wp-block-group naturlust-header__grid">
 
-		<!-- wp:site-title {"level":0,"textAlign":"center","fontFamily":"serif","style":{"typography":{"fontSize":"clamp(1.1rem, 0.8rem + 1.2vw, 1.6rem)","fontWeight":"600","letterSpacing":"0.02em"}}} /-->
+		<!-- wp:group {"className":"naturlust-header__start","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+		<div class="wp-block-group naturlust-header__start">
+			<!-- wp:navigation {"ref":331,"icon":"menu","overlayMenu":"always","overlayBackgroundColor":"paper","overlayTextColor":"ink","textColor":"ink","className":"naturlust-hamburger","style":{"typography":{"fontFamily":"var:preset|font-family|serif","fontSize":"1.15rem"}}} /-->
+		</div>
+		<!-- /wp:group -->
 
-		<!-- wp:search {"label":"","showLabel":false,"placeholder":"Suchen","buttonText":"Suchen","buttonPosition":"button-only","buttonUseIcon":true} /-->
+		<!-- wp:group {"className":"naturlust-header__center","layout":{"type":"constrained","contentSize":"600px"}} -->
+		<div class="wp-block-group naturlust-header__center">
+			<!-- wp:site-title {"level":0,"textAlign":"center","fontFamily":"serif","style":{"typography":{"fontSize":"clamp(1.4rem, 1rem + 1.5vw, 2.2rem)","fontWeight":"600","letterSpacing":"0.01em"}}} /-->
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:group {"className":"naturlust-header__end"} -->
+		<div class="wp-block-group naturlust-header__end"></div>
+		<!-- /wp:group -->
 
 	</div>
 	<!-- /wp:group -->
