@@ -2,7 +2,7 @@
 /**
  * Title: Kategorie-Kacheln
  * Slug: naturlust/category-tiles
- * Description: Vier runde Kategorie-Buttons (Wandern, Radfahren, Fotografieren, Waldbaden) mit kleinem Logo in der Mitte.
+ * Description: Vier runde Kategorie-Buttons (Wandern, Radfahren, Fotografieren, Waldbaden).
  * Categories: featured
  * Keywords: naturlust, kategorien, startseite
  * Block Types: core/group
@@ -10,12 +10,6 @@
  */
 
 $naturlust_base = esc_url( get_stylesheet_directory_uri() . '/assets/images/categories' );
-
-/* Kleines Mittellogo aus custom_logo holen. */
-$naturlust_center_logo_id  = (int) get_theme_mod( 'custom_logo' );
-$naturlust_center_logo_url = $naturlust_center_logo_id
-	? wp_get_attachment_image_url( $naturlust_center_logo_id, 'thumbnail' )
-	: '';
 
 $naturlust_tiles = array(
 	array(
@@ -51,15 +45,7 @@ $naturlust_tiles = array(
 <!-- wp:html -->
 <nav class="naturlust-category-tiles" aria-label="<?php esc_attr_e( 'Hauptkategorien', 'naturlust' ); ?>">
 	<?php
-	foreach ( $naturlust_tiles as $i => $tile ) :
-		/* Mittellogo zwischen Kachel 2 (Index 1) und Kachel 3 (Index 2) einfügen. */
-		if ( 2 === $i && $naturlust_center_logo_url ) :
-			?>
-			<span class="naturlust-category-tiles__center" aria-hidden="true">
-				<img src="<?php echo esc_url( $naturlust_center_logo_url ); ?>" alt="" loading="lazy" decoding="async" width="80" height="80" />
-			</span>
-			<?php
-		endif;
+	foreach ( $naturlust_tiles as $tile ) :
 		?>
 		<a class="naturlust-category-tiles__item" href="<?php echo esc_url( $tile['href'] ); ?>">
 			<span class="naturlust-category-tiles__image">

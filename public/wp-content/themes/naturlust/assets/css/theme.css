@@ -264,9 +264,9 @@ body {
 
 .naturlust-category-tiles {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(50px, 90px) repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(1rem, 2vw, 2rem);
-  align-items: center;
+  align-items: start;
   width: min(92%, 900px);
   max-width: 900px; /* hebt constrained-layout max-width:720px auf */
   margin: clamp(2.5rem, 5vw, 4rem) auto 0;
@@ -312,28 +312,10 @@ body {
   font-weight: 500;
 }
 
-.naturlust-category-tiles__center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.naturlust-category-tiles__center img {
-  width: 100%;
-  max-width: 70px;
-  height: auto;
-  display: block;
-  border-radius: 50%;
-  opacity: 0.75;
-}
-
 @media (max-width: 700px) {
   .naturlust-category-tiles {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem;
-  }
-  .naturlust-category-tiles__center {
-    display: none;
   }
 }
 
