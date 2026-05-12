@@ -28,7 +28,7 @@ body {
   }
 }
 
-/* --- Header: drei Spalten (Hamburger | Titel | leer) ---------------- */
+/* --- Header: drei Spalten (Logo+Hamburger | Titel | leer) ----------- */
 
 .naturlust-header__grid {
   display: grid;
@@ -46,6 +46,24 @@ body {
   .naturlust-header__grid {
     grid-template-columns: auto 1fr auto;
   }
+}
+
+/* Site-Logo: rundes Skizzen-Stempel-Logo oben links */
+
+.naturlust-logo {
+  line-height: 0;
+}
+
+.naturlust-logo .custom-logo-link {
+  display: inline-block;
+  width: clamp(56px, 7vw, 88px);
+  height: clamp(56px, 7vw, 88px);
+}
+
+.naturlust-logo img.custom-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* Hamburger-Icon des Navigation-Blocks deutlich, dunkel, gut tappbar */

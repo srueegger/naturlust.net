@@ -20,6 +20,16 @@ add_action(
 		add_theme_support( 'editor-styles' );
 		add_theme_support( 'wp-block-styles' );
 		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' ) );
+		add_theme_support(
+			'custom-logo',
+			array(
+				'height'               => 1000,
+				'width'                => 1000,
+				'flex-height'          => true,
+				'flex-width'           => true,
+				'unlink-homepage-logo' => false,
+			)
+		);
 
 		add_image_size( 'naturlust-card', 960, 540, true );
 		add_image_size( 'naturlust-hero', 1920, 1080, true );
