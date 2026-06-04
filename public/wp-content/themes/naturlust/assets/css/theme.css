@@ -486,3 +486,162 @@ body.naturlust-nav-open {
     color: #ece4d2 !important;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/*  Inhalts-„Blatt": solider Hintergrund hinter dem Text auf allen      */
+/*  Seiten ausser der Startseite, damit der Text vor der Kartengrafik   */
+/*  gut lesbar ist. Die Karte bleibt rund um das Blatt sichtbar.        */
+/* ------------------------------------------------------------------ */
+.naturlust-surface {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 820px;
+  margin-block: clamp(1.5rem, 4vw, 3rem);
+  margin-inline: auto;
+  padding: clamp(1.5rem, 5vw, 3.25rem) clamp(1.25rem, 4vw, 2.75rem);
+  background-color: #eae4dc;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(31, 42, 35, 0.12);
+}
+
+/* Breitere Variante für Raster-Ansichten (Kategorie-/Sucharchive). */
+.naturlust-surface--wide {
+  max-width: 1120px;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Kontaktformular (Contact Form 7)                                    */
+/* ------------------------------------------------------------------ */
+.wpcf7-form p {
+  margin: 0 0 1.15rem;
+}
+
+.wpcf7-form label,
+.wpcf7-quiz-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.wpcf7-form input.wpcf7-text,
+.wpcf7-form input.wpcf7-email,
+.wpcf7-form input.wpcf7-tel,
+.wpcf7-form input.wpcf7-number,
+.wpcf7-form input.wpcf7-date,
+.wpcf7-form input.wpcf7-quiz,
+.wpcf7-form textarea.wpcf7-textarea,
+.wpcf7-form select.wpcf7-select {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.15rem;
+  padding: 0.7rem 0.9rem;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--wp--preset--color--ink);
+  background-color: #fcf9f2;
+  border: 1px solid rgba(31, 42, 35, 0.25);
+  border-radius: 8px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.wpcf7-form textarea.wpcf7-textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+.wpcf7-form input:focus,
+.wpcf7-form textarea:focus,
+.wpcf7-form select:focus {
+  outline: none;
+  border-color: var(--wp--preset--color--forest);
+  box-shadow: 0 0 0 3px rgba(44, 74, 47, 0.18);
+}
+
+.wpcf7-form input.wpcf7-submit {
+  display: inline-block;
+  width: auto;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  padding: 0.7rem 1.9rem;
+  font-family: var(--wp--preset--font-family--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--wp--preset--color--paper);
+  background-color: var(--wp--preset--color--forest);
+  border: none;
+  border-radius: 999px;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.wpcf7-form input.wpcf7-submit:hover,
+.wpcf7-form input.wpcf7-submit:focus-visible {
+  background-color: var(--wp--preset--color--forest-deep);
+  transform: translateY(-1px);
+}
+
+/* Validierung & Rückmeldungen */
+.wpcf7-not-valid {
+  border-color: var(--wp--preset--color--berry) !important;
+}
+
+.wpcf7-not-valid-tip {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--wp--preset--color--berry);
+}
+
+.wpcf7-response-output {
+  margin: 1.1rem 0 0 !important;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Dark Mode – Blatt & Formular                                        */
+/* ------------------------------------------------------------------ */
+@media (prefers-color-scheme: dark) {
+  .naturlust-surface {
+    background-color: #534e4b;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .wpcf7-form input.wpcf7-text,
+  .wpcf7-form input.wpcf7-email,
+  .wpcf7-form input.wpcf7-tel,
+  .wpcf7-form input.wpcf7-number,
+  .wpcf7-form input.wpcf7-date,
+  .wpcf7-form input.wpcf7-quiz,
+  .wpcf7-form textarea.wpcf7-textarea,
+  .wpcf7-form select.wpcf7-select {
+    background-color: #423e3b;
+    border-color: rgba(236, 228, 210, 0.24);
+    color: var(--wp--preset--color--ink);
+  }
+
+  .wpcf7-form input::placeholder,
+  .wpcf7-form textarea::placeholder {
+    color: rgba(236, 228, 210, 0.5);
+  }
+
+  .wpcf7-form input:focus,
+  .wpcf7-form textarea:focus,
+  .wpcf7-form select:focus {
+    border-color: #8fbf83;
+    box-shadow: 0 0 0 3px rgba(143, 191, 131, 0.22);
+  }
+
+  /* Senden-Button: dunkelgrün mit hellem Text (nicht das aufgehellte
+     forest-Token, das hier hell-auf-hell wäre). */
+  .wpcf7-form input.wpcf7-submit {
+    background-color: #2f5a37;
+    color: #ece4d2;
+  }
+
+  .wpcf7-form input.wpcf7-submit:hover,
+  .wpcf7-form input.wpcf7-submit:focus-visible {
+    background-color: #3a6e43;
+  }
+}
