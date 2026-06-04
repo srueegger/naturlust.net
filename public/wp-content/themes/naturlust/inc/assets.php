@@ -9,6 +9,22 @@ declare( strict_types=1 );
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Liefert einen Versions-String aus der Datei-Änderungszeit als
+ * Datum/Uhrzeit (z. B. „20260605.143022"). Da sich der Wert bei jeder
+ * Änderung einer Datei ändert, lädt der Browser CSS/JS automatisch neu –
+ * man muss also keine Caches manuell leeren. Fehlt die Datei, dient die
+ * Theme-Version als Rückfallwert.
+ *
+ * @param string $path Absoluter Pfad zur Asset-Datei.
+ * @return string
+ */
+function naturlust_asset_version( string $path ): string {
+	$mtime = file_exists( $path ) ? filemtime( $path ) : false;
+
+	return false !== $mtime ? gmdate( 'Ymd.His', $mtime ) : NATURLUST_VERSION;
+}
+
 add_action(
 	'wp_enqueue_scripts',
 	static function (): void {
@@ -20,7 +36,7 @@ add_action(
 				'naturlust-theme',
 				$style_uri,
 				array(),
-				filemtime( $style_path )
+				naturlust_asset_version( $style_path )
 			);
 		}
 
@@ -33,7 +49,7 @@ add_action(
 				'naturlust-hamburger',
 				$script_uri,
 				array(),
-				filemtime( $script_path ),
+				naturlust_asset_version( $script_path ),
 				array(
 					'strategy'  => 'defer',
 					'in_footer' => true,
