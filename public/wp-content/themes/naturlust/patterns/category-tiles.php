@@ -2,7 +2,7 @@
 /**
  * Title: Kategorie-Kacheln
  * Slug: naturlust/category-tiles
- * Description: Vier runde Kategorie-Buttons (Wandern, Radfahren, Fotografieren, Waldbaden).
+ * Description: Fünf runde Kategorie-Buttons (Wandern, Radfahren, Fotografieren, Waldbaden, Tagebuch).
  * Categories: featured
  * Keywords: naturlust, kategorien, startseite
  * Block Types: core/group
@@ -54,6 +54,13 @@ $naturlust_tiles = array(
 		'href'  => esc_url( $naturlust_term_url( 'waldbaden' ) ),
 		'img'   => $naturlust_base . '/waldbaden.png',
 		'alt'   => __( 'Skizze einer Person beim Waldbaden zwischen Tannen', 'naturlust' ),
+	),
+	array(
+		'slug'  => 'tagebuch',
+		'label' => __( 'Tagebuch', 'naturlust' ),
+		'href'  => esc_url( $naturlust_term_url( 'tagebuch' ) ),
+		'img'   => $naturlust_base . '/tagebuch.png',
+		'alt'   => __( 'Skizze eines aufgeschlagenen Naturtagebuchs', 'naturlust' ),
 	),
 );
 ?>

@@ -305,16 +305,18 @@ body.naturlust-nav-open {
 /*  der Mitte (Rendering zeigt einen kleinen Stempel-Kreis zentriert). */
 
 .naturlust-category-tiles {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* zentriert auch eine unvollständige letzte Reihe */
+  align-items: flex-start;
   gap: clamp(1rem, 2vw, 2rem);
-  align-items: start;
-  width: min(92%, 900px);
-  max-width: 900px; /* hebt constrained-layout max-width:720px auf */
+  width: min(94%, 1040px);
+  max-width: 1040px; /* hebt constrained-layout max-width:720px auf */
   margin: clamp(2.5rem, 5vw, 4rem) auto 0;
 }
 
 .naturlust-category-tiles__item {
+  flex: 0 1 150px; /* Breite je Kachel; bricht bei Bedarf um */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -356,8 +358,10 @@ body.naturlust-nav-open {
 
 @media (max-width: 700px) {
   .naturlust-category-tiles {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem;
+  }
+  .naturlust-category-tiles__item {
+    flex-basis: 130px;
   }
 }
 
