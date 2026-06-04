@@ -70,153 +70,129 @@ body {
 
 /* Hamburger-Anker oben links: 40x40 Tap-Target, dezentes 3-Linien-    */
 /* Icon im Schwarz/Tinte. Beim Aufklappen wird ein Vollbild-Overlay    */
-/* in Pergament-Farbe angezeigt.                                       */
+/* in Pergament-Farbe angezeigt. Markup: Pattern naturlust/hamburger,  */
+/* das das klassische Menü der Position „primary" rendert; Steuerung   */
+/* in assets/js/hamburger.js.                                          */
 
-.naturlust-hamburger {
+.naturlust-nav__toggle {
   position: absolute;
   top: clamp(0.9rem, 1.4vw, 1.4rem);
   left: var(--naturlust-page-padding);
   z-index: 20;
-}
-
-.naturlust-hamburger .wp-block-navigation__responsive-container-open {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
   padding: 0;
+  border: none;
   border-radius: 4px;
   background: transparent;
   color: var(--wp--preset--color--ink);
+  cursor: pointer;
   transition: background-color 150ms ease;
 }
 
-.naturlust-hamburger .wp-block-navigation__responsive-container-open:hover,
-.naturlust-hamburger .wp-block-navigation__responsive-container-open:focus-visible {
+.naturlust-nav__toggle:hover,
+.naturlust-nav__toggle:focus-visible {
   background: rgba(31, 42, 35, 0.08);
 }
 
-.naturlust-hamburger .wp-block-navigation__responsive-container-open svg {
-  width: 26px;
-  height: 26px;
-  fill: currentColor;
-}
-
-.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open {
+/* Vollbild-Overlay */
+.naturlust-nav__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
   background-color: var(--wp--preset--color--paper);
   background-image:
     linear-gradient(rgba(247, 241, 227, 0.6), rgba(247, 241, 227, 0.6)),
     url(../images/brand/map-background.jpg);
   background-size: cover, cover;
   background-position: center, center;
-  background-attachment: scroll, scroll;
+  background-repeat: no-repeat, no-repeat;
 }
 
-/* Der Close-Wrapper bleibt im Fluss und füllt das Overlay, damit der
-   Dialog seinen Inhalt sauber mittig ausrichten kann (kein Herausziehen
-   per position:absolute mehr – das brach die Zentrierung). */
-.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-close {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0;
+.naturlust-nav__overlay[hidden] {
+  display: none;
 }
 
-.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog {
-  position: static;
-  height: 100%;
-  margin: 0;
-  display: flex;
+/* Scroll-Sperre, solange das Menü offen ist. */
+body.naturlust-nav-open {
+  overflow: hidden;
+}
+
+/* Close-Button: oben rechts, über dem Inhalt und sicher klickbar. */
+.naturlust-nav__close {
+  position: absolute;
+  top: clamp(0.9rem, 1.4vw, 1.4rem);
+  right: var(--naturlust-page-padding);
+  z-index: 10;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 6px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--wp--preset--color--ink);
+  cursor: pointer;
+  transition: background-color 150ms ease;
 }
 
-/* Inhaltsbereich: zentrierte Spalte. Scrollbar, falls die Einträge auf
-   sehr niedrigen (Quer-)Displays höher als der Viewport werden; das
-   padding-top hält den ersten Eintrag unter dem Close-Button frei. */
-.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content {
-  width: 100%;
+.naturlust-nav__close:hover,
+.naturlust-nav__close:focus-visible {
+  background: rgba(31, 42, 35, 0.08);
+}
+
+/* Inhaltsbereich: füllt das Overlay und zentriert die Liste; bei Überlauf
+   (z. B. niedrige Quer-Displays) oben ausgerichtet und scrollbar. Das
+   padding-top hält den ersten Eintrag frei vom Close-Button. */
+.naturlust-nav__menu {
+  flex: 1;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column; /* Core nutzt column – explizit, damit align/justify eindeutig wirken */
-  align-items: center;          /* horizontale Zentrierung der Liste */
-  justify-content: safe center; /* vertikal zentriert; bei Überlauf oben ausgerichtet u. scrollbar */
-  height: 100%;      /* definite Höhe → overflow-y scrollt zuverlässig */
+  flex-direction: column;
+  align-items: center;
+  justify-content: safe center;
   min-height: 0;
   overflow-y: auto;
   padding: 4rem 1.5rem;
 }
 
-/* Liste: Spalte, Breite nach Inhalt (kein width:100%, das die Items aus
-   der Mitte schieben würde). */
-.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container {
-  position: static; /* Core setzt die Liste auf absolute (oben links) – zurück in den Fluss */
-  flex: 1;          /* füllt die Höhe des Content-Bereichs ... */
+.naturlust-nav__list {
   display: flex;
   flex-direction: column;
-  align-items: center;          /* ... Items horizontal zentriert ... */
-  justify-content: safe center; /* ... und vertikal zentriert (bei Überlauf oben, scrollbar) */
+  align-items: center;
   gap: clamp(1.25rem, 4vh, 2rem);
   list-style: none;
   margin: 0;
   padding: 0;
-  width: 100%;
 }
 
-.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item {
-  width: auto;
+.naturlust-nav__list li {
   text-align: center;
 }
 
-.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open a {
+.naturlust-nav__list a {
   font-family: var(--wp--preset--font-family--serif);
   font-size: clamp(1.5rem, 1.1rem + 2vw, 2.6rem);
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0.04em;
   color: var(--wp--preset--color--ink);
-  text-decoration: none !important;
+  text-decoration: none;
   opacity: 0.9;
   transition: color 180ms ease, opacity 180ms ease;
   display: block;
   line-height: 1.2;
 }
 
-.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open a:hover,
-.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open a:focus-visible {
+.naturlust-nav__list a:hover,
+.naturlust-nav__list a:focus-visible {
   color: var(--wp--preset--color--forest);
   opacity: 1;
-}
-
-/* Close-Button: oben rechts, über dem Inhalt und sicher klickbar. */
-.naturlust-hamburger .wp-block-navigation__responsive-container-close {
-  position: absolute;
-  top: clamp(0.9rem, 1.4vw, 1.4rem);
-  right: var(--naturlust-page-padding);
-  left: auto;
-  z-index: 10;
-  color: var(--wp--preset--color--ink);
-  background: transparent;
-  border: none;
-  padding: 6px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  transition: background-color 150ms ease;
-}
-
-.naturlust-hamburger .wp-block-navigation__responsive-container-close:hover,
-.naturlust-hamburger .wp-block-navigation__responsive-container-close:focus-visible {
-  background: rgba(31, 42, 35, 0.08);
-}
-
-.naturlust-hamburger .wp-block-navigation__responsive-container-close svg {
-  width: 28px;
-  height: 28px;
-  fill: currentColor;
 }
 
 /* --- Site-Stempel: rundes Logo links neben dem Hero, schwebend ------ */

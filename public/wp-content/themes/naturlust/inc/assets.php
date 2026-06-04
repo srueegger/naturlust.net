@@ -23,6 +23,23 @@ add_action(
 				filemtime( $style_path )
 			);
 		}
+
+		// Hamburger-Overlay-Steuerung (Pattern naturlust/hamburger).
+		$script_path = NATURLUST_DIR . 'assets/js/hamburger.js';
+		$script_uri  = NATURLUST_URI . 'assets/js/hamburger.js';
+
+		if ( file_exists( $script_path ) ) {
+			wp_enqueue_script(
+				'naturlust-hamburger',
+				$script_uri,
+				array(),
+				filemtime( $script_path ),
+				array(
+					'strategy'  => 'defer',
+					'in_footer' => true,
+				)
+			);
+		}
 	}
 );
 
