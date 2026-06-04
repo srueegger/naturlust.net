@@ -12,6 +12,18 @@
   --naturlust-page-padding: clamp(1.25rem, 4vw, 3rem);
 }
 
+/* Sicherheitsnetz: nichts darf horizontales Scrollen auslösen. Fängt
+   Sonderfälle ab (alignfull-Breakouts, breite Hintergründe), ohne dass
+   wir auf sticky-Positionierung angewiesen sind. */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 /* --- Hintergrund: skizzierte Landkarte, durchgehend bis zum Footer -- */
 
 body {
@@ -101,43 +113,51 @@ body {
   background-attachment: scroll, scroll;
 }
 
-/* Overlay: flex column, center the nav items vertically */
-.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-}
-
-/* Close button area: pull out of flow so it doesn't push nav down */
+/* Der Close-Wrapper bleibt im Fluss und füllt das Overlay, damit der
+   Dialog seinen Inhalt sauber mittig ausrichten kann (kein Herausziehen
+   per position:absolute mehr – das brach die Zentrierung). */
 .naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-close {
-  position: absolute !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: auto !important;
-  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
 .naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog {
-  pointer-events: auto;
+  position: static;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Close button: top-right corner */
-.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close {
-  position: absolute !important;
-  top: clamp(0.9rem, 1.4vw, 1.4rem) !important;
-  right: var(--naturlust-page-padding) !important;
-  left: auto !important;
-  pointer-events: auto;
+/* Inhaltsbereich: zentrierte Spalte. Scrollbar, falls die Einträge auf
+   sehr niedrigen (Quer-)Displays höher als der Viewport werden; das
+   padding-top hält den ersten Eintrag unter dem Close-Button frei. */
+.naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Core nutzt column – explizit, damit align/justify eindeutig wirken */
+  align-items: center;          /* horizontale Zentrierung der Liste */
+  justify-content: safe center; /* vertikal zentriert; bei Überlauf oben ausgerichtet u. scrollbar */
+  height: 100%;      /* definite Höhe → overflow-y scrollt zuverlässig */
+  min-height: 0;
+  overflow-y: auto;
+  padding: 4rem 1.5rem;
 }
 
-/* Nav items: centered column, the only flex child of the overlay */
+/* Liste: Spalte, Breite nach Inhalt (kein width:100%, das die Items aus
+   der Mitte schieben würde). */
 .naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container {
+  position: static; /* Core setzt die Liste auf absolute (oben links) – zurück in den Fluss */
+  flex: 1;          /* füllt die Höhe des Content-Bereichs ... */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  align-items: center;          /* ... Items horizontal zentriert ... */
+  justify-content: safe center; /* ... und vertikal zentriert (bei Überlauf oben, scrollbar) */
+  gap: clamp(1.25rem, 4vh, 2rem);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -151,7 +171,7 @@ body {
 
 .naturlust-hamburger .wp-block-navigation__responsive-container.is-menu-open a {
   font-family: var(--wp--preset--font-family--serif);
-  font-size: clamp(1.6rem, 1.2rem + 2vw, 2.6rem);
+  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.6rem);
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0.04em;
@@ -169,11 +189,13 @@ body {
   opacity: 1;
 }
 
-/* Close button: top-right, ink-colored */
+/* Close-Button: oben rechts, über dem Inhalt und sicher klickbar. */
 .naturlust-hamburger .wp-block-navigation__responsive-container-close {
   position: absolute;
   top: clamp(0.9rem, 1.4vw, 1.4rem);
   right: var(--naturlust-page-padding);
+  left: auto;
+  z-index: 10;
   color: var(--wp--preset--color--ink);
   background: transparent;
   border: none;
@@ -389,17 +411,25 @@ body {
   opacity: 0.85;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
+  /* Footer stapelt vertikal und zentriert: das grosse Einzug-Margin und
+     das nowrap der Desktop-Ansicht würden auf schmalen Viewports über
+     den Bildschirmrand hinauslaufen. */
   .naturlust-footer__grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
   .naturlust-footer__start {
-    justify-self: center;
-    padding-left: 0;
+    margin-left: 0;
   }
   .naturlust-footer__end {
-    justify-self: center;
+    margin-left: 0;
+    text-align: center;
+  }
+  .naturlust-footer .wp-block-navigation .wp-block-navigation__container {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
