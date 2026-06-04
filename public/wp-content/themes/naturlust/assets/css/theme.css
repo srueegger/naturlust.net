@@ -132,13 +132,8 @@ body:not(.home) .naturlust-header__center .wp-block-site-tagline {
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  background-color: var(--wp--preset--color--paper);
-  background-image:
-    linear-gradient(rgba(247, 241, 227, 0.6), rgba(247, 241, 227, 0.6)),
-    url(../images/brand/map-background.jpg);
-  background-size: cover, cover;
-  background-position: center, center;
-  background-repeat: no-repeat, no-repeat;
+  /* Komplett farbiger Hintergrund in der Text-Surface-Farbe (hell). */
+  background-color: #eae4dc;
 }
 
 .naturlust-nav__overlay[hidden] {
@@ -484,12 +479,9 @@ body.naturlust-nav-open {
       url(../images/brand/map-background.jpg);
   }
 
-  /* Menü-Overlay ebenfalls dunkel. */
+  /* Menü-Overlay komplett farbig in der Text-Surface-Farbe (dunkel). */
   .naturlust-nav__overlay {
-    background-color: #19211d;
-    background-image:
-      linear-gradient(rgba(13, 18, 15, 0.86), rgba(13, 18, 15, 0.92)),
-      url(../images/brand/map-background.jpg);
+    background-color: #534e4b;
   }
 
   /* Hover-Flächen der Icon-Buttons auf Dunkel sichtbar halten. */
