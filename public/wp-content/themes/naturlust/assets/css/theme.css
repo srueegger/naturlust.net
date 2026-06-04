@@ -68,6 +68,33 @@ body {
   opacity: 0.85;
 }
 
+/* Kopf: Startseite zeigt den Schriftzug, Unterseiten das Logo. */
+.naturlust-header .wp-block-site-logo {
+  display: none;
+}
+
+.naturlust-header__center .wp-block-site-logo img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body:not(.home) .naturlust-header .wp-block-site-logo {
+  display: block;
+}
+
+body:not(.home) .naturlust-header .wp-block-site-title {
+  display: none;
+}
+
+/* Slogan auf Unterseiten grösser, fett und aufrecht für bessere Lesbarkeit. */
+body:not(.home) .naturlust-header__center .wp-block-site-tagline {
+  margin-top: 0.5rem;
+  font-style: normal !important;
+  font-weight: 700;
+  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem) !important;
+  opacity: 1;
+}
+
 /* Hamburger-Anker oben links: 40x40 Tap-Target, dezentes 3-Linien-    */
 /* Icon im Schwarz/Tinte. Beim Aufklappen wird ein Vollbild-Overlay    */
 /* in Pergament-Farbe angezeigt. Markup: Pattern naturlust/hamburger,  */
@@ -600,6 +627,50 @@ body.naturlust-nav-open {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Schriftgrösse-Umschalter (Plugin „font-resizer") – +/- Buttons      */
+/*  ans Design angepasst; grelle Inline-Icon-Farbe wird übersteuert.    */
+/* ------------------------------------------------------------------ */
+.fsc_text {
+  text-align: center;
+  margin: 0 0 1.5rem;
+}
+
+.fsc_btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin: 0 0.3rem;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--wp--preset--color--forest) !important;
+  background: transparent !important;
+  cursor: pointer;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.fsc_btn i,
+.fsc_btn .fa {
+  color: var(--wp--preset--color--forest) !important;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.fsc_btn:hover,
+.fsc_btn:focus-visible {
+  background: var(--wp--preset--color--forest) !important;
+  transform: translateY(-1px);
+}
+
+.fsc_btn:hover i,
+.fsc_btn:focus-visible i,
+.fsc_btn:hover .fa,
+.fsc_btn:focus-visible .fa {
+  color: var(--wp--preset--color--paper) !important;
+}
+
+/* ------------------------------------------------------------------ */
 /*  Dark Mode – Blatt & Formular                                        */
 /* ------------------------------------------------------------------ */
 @media (prefers-color-scheme: dark) {
@@ -643,5 +714,13 @@ body.naturlust-nav-open {
   .wpcf7-form input.wpcf7-submit:hover,
   .wpcf7-form input.wpcf7-submit:focus-visible {
     background-color: #3a6e43;
+  }
+
+  /* +/- Buttons: auf dem hellgrünen Hover-Grund dunkles Icon. */
+  .fsc_btn:hover i,
+  .fsc_btn:focus-visible i,
+  .fsc_btn:hover .fa,
+  .fsc_btn:focus-visible .fa {
+    color: #19211d !important;
   }
 }
