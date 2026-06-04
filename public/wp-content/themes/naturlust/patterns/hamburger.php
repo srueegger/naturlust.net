@@ -36,7 +36,7 @@ if ( ! has_nav_menu( 'primary' ) ) {
 					'theme_location' => 'primary',
 					'container'      => false,
 					'menu_class'     => 'naturlust-nav__list',
-					'depth'          => 1,
+					'depth'          => 0,
 					'fallback_cb'    => false,
 				)
 			);
