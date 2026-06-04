@@ -3,8 +3,9 @@
 Redesign der Naturlust-Website ([naturlust.net](https://naturlust.net)) als
 lokale Entwicklungsumgebung mit DDEV und WordPress. Ziel des Projekts ist
 ein eigenständiges, responsives WordPress-Block-Theme im skizzenhaften
-Naturkarten-Stil, das die bestehenden Inhalte über die WordPress-REST-API
-der Live-Site übernimmt.
+Naturkarten-Stil. Die lokale Installation ist eine vollständige
+Wiederherstellung der Live-Site aus einem UpdraftPlus-Backup; das Theme
+wird gegen diesen realen Datenbestand entwickelt.
 
 ---
 
@@ -31,7 +32,7 @@ der Live-Site übernimmt.
 | Live-Site         | <https://naturlust.net>                                    |
 | Lokale URL        | <https://naturlust.ddev.site>                              |
 | Inhaltliche Säulen | Wandern, Radfahren, Fotografieren, Waldbaden              |
-| Status            | Theme produktiv, Demo-Inhalte aktiv, Live-Import pausiert  |
+| Status            | Theme aktiv, Live-Inhalte aus Backup wiederhergestellt     |
 
 Eine ausführliche Beschreibung der Designideen, Skizzen und Renderings des
 Auftraggebers liegt unter [`ASSETS/`](ASSETS/).
@@ -41,7 +42,7 @@ Auftraggebers liegt unter [`ASSETS/`](ASSETS/).
 - DDEV (lokale Container-Umgebung)
 - PHP 8.3 (nginx-fpm)
 - MariaDB 11.8 (DDEV-Default)
-- WordPress 6.9.4 in deutscher Lokalisierung (`de_DE`)
+- WordPress 7.0 in deutscher Lokalisierung (`de_DE`), DB-Präfix `gowp_`
 - Eigenes Custom Block-Theme (FSE) im Verzeichnis
   [`public/wp-content/themes/naturlust/`](public/wp-content/themes/naturlust/)
 - WP-CLI (über `ddev wp …`)
@@ -111,6 +112,37 @@ ddev wp theme activate naturlust
 Anschließend ist die Site unter <https://naturlust.ddev.site> erreichbar,
 das Backend unter <https://naturlust.ddev.site/wp-admin>.
 
+### Wiederherstellung aus einem Live-Backup
+
+Der aktuelle lokale Datenbestand stammt aus einem UpdraftPlus-Backup der
+Live-Site (DB, Uploads, Drittanbieter-Themes und -Plugins). Um einen
+neuen Backup-Satz einzuspielen:
+
+```bash
+# 1. wp-content-Inhalte aus den Backup-ZIPs nach public/wp-content/
+#    entpacken (themes, plugins, uploads, others) – das Projekt-Theme
+#    naturlust und das Plugin naturlust-importer dabei behalten.
+
+# 2. WordPress-Core passend zur Backup-Version laden
+ddev wp core download --version=7.0 --locale=de_DE --skip-content
+
+# 3. wp-config mit dem Live-Tabellenpräfix erzeugen
+ddev wp config create --dbname=db --dbuser=db --dbpass=db \
+  --dbhost=db --dbprefix=gowp_ --locale=de_DE --force
+
+# 4. DB-Dump importieren (UpdraftPlus liefert .gz → vorher entpacken)
+gunzip -c <backup>-db.gz > /tmp/dump.sql
+ddev import-db --file=/tmp/dump.sql
+
+# 5. URLs auf die lokale Domain umschreiben
+ddev wp search-replace 'https://naturlust.net' 'https://naturlust.ddev.site' \
+  --all-tables --precise
+
+# 6. Theme aktivieren, Rewrite-Regeln & Caches leeren
+ddev wp theme activate naturlust
+ddev wp rewrite flush && ddev wp cache flush
+```
+
 ### Zugangsdaten (lokal)
 
 - Backend-URL: <https://naturlust.ddev.site/wp-admin>
@@ -165,12 +197,12 @@ Relevante REST-Endpunkte:
 - `/wp/v2/tags`
 - `/wp/v2/media`
 
-**Aktueller Stand:** Der Live-Hoster blockiert Anfragen aus dem
-Entwicklungsnetz (`Connection refused` auf 185.30.32.111:443). Lokal
-arbeiten wir deshalb mit Demo-Beiträgen und Demo-Seiten, das Plugin
-bleibt installiert, aber deaktiviert. Sobald die Verbindung wieder
-freigegeben ist, lässt sich der reale Import wie oben beschrieben
-starten.
+**Aktueller Stand:** Der lokale Datenbestand wurde nicht über die
+REST-API, sondern aus einem vollständigen UpdraftPlus-Backup der
+Live-Site wiederhergestellt (siehe
+[Wiederherstellung aus einem Live-Backup](#wiederherstellung-aus-einem-live-backup)).
+Der Live-Hoster blockiert Anfragen aus dem Entwicklungsnetz, weshalb der
+REST-Importer als alternativer Weg installiert, aber deaktiviert bleibt.
 
 ## Design-Vorgaben
 
