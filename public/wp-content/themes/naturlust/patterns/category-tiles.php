@@ -11,32 +11,47 @@
 
 $naturlust_base = esc_url( get_stylesheet_directory_uri() . '/assets/images/categories' );
 
+/**
+ * Liefert das Kategorie-Archiv anhand des Slugs. Die Live-Site nutzt die
+ * Permalink-Struktur /%category%/%postname%/, das Archiv liegt also unter
+ * /<slug>/ (ohne /category/-Präfix). Fehlt der Begriff, zeigt der Link
+ * sicherheitshalber auf die Startseite.
+ *
+ * @param string $slug Kategorie-Slug.
+ * @return string
+ */
+$naturlust_term_url = static function ( string $slug ): string {
+	$link = get_term_link( $slug, 'category' );
+
+	return is_wp_error( $link ) ? home_url( '/' ) : $link;
+};
+
 $naturlust_tiles = array(
 	array(
 		'slug'  => 'wandern',
 		'label' => __( 'Wandern', 'naturlust' ),
-		'href'  => esc_url( home_url( '/category/wandern/' ) ),
+		'href'  => esc_url( $naturlust_term_url( 'wandern' ) ),
 		'img'   => $naturlust_base . '/wandern.png',
 		'alt'   => __( 'Skizze von zwei Wanderern in den Bergen', 'naturlust' ),
 	),
 	array(
 		'slug'  => 'radfahren',
 		'label' => __( 'Radfahren', 'naturlust' ),
-		'href'  => esc_url( home_url( '/category/radfahren/' ) ),
+		'href'  => esc_url( $naturlust_term_url( 'radfahren' ) ),
 		'img'   => $naturlust_base . '/radfahren.png',
 		'alt'   => __( 'Skizze eines Radfahrers vor einer Berglandschaft', 'naturlust' ),
 	),
 	array(
-		'slug'  => 'fotografieren',
+		'slug'  => 'naturfotografie',
 		'label' => __( 'Fotografieren', 'naturlust' ),
-		'href'  => esc_url( home_url( '/category/fotografieren/' ) ),
+		'href'  => esc_url( $naturlust_term_url( 'naturfotografie' ) ),
 		'img'   => $naturlust_base . '/fotografieren.png',
 		'alt'   => __( 'Skizze einer Person mit Kamera im Wald', 'naturlust' ),
 	),
 	array(
 		'slug'  => 'waldbaden',
 		'label' => __( 'Waldbaden', 'naturlust' ),
-		'href'  => esc_url( home_url( '/category/waldbaden/' ) ),
+		'href'  => esc_url( $naturlust_term_url( 'waldbaden' ) ),
 		'img'   => $naturlust_base . '/waldbaden.png',
 		'alt'   => __( 'Skizze einer Person beim Waldbaden zwischen Tannen', 'naturlust' ),
 	),

@@ -17,13 +17,14 @@ werden muss, dorthin verlinken, nicht hier duplizieren.
 ## Projekt in einem Satz
 
 Greenfield-Redesign der WordPress-Seite naturlust.net als Custom-Block-
-Theme (FSE) in einer DDEV-Umgebung; Inhalte werden über die REST-API
-der bestehenden Live-Site übernommen.
+Theme (FSE) in einer DDEV-Umgebung; die lokale Datenbank und die Medien
+stammen aus einem vollständigen UpdraftPlus-Backup der Live-Site.
 
 ## Stack-Eckdaten
 
 - Lokale Umgebung: DDEV, PHP 8.3, nginx-fpm, MariaDB 11.8
-- WordPress 6.9.4, Locale `de_DE`, Permalinks `/%postname%/`
+- WordPress 7.0, Locale `de_DE`, Permalinks `/%category%/%postname%/`
+- DB-Tabellenpräfix `gowp_` (aus dem Live-Backup übernommen)
 - Lokale URL: <https://naturlust.ddev.site>
 - Theme im Aufbau: [`public/wp-content/themes/naturlust/`](public/wp-content/themes/naturlust/)
 - Webroot: `public/`
@@ -89,27 +90,34 @@ arbeiten.
   Im Backend (`/wp-admin`) wird der Cache bei aktivem `WP_DEBUG`
   automatisch verworfen.
 
-### Inhalte aus der Live-Site
+### Inhalte (Live-Stand)
 
-- Quelle ist die öffentliche REST-API: <https://naturlust.net/wp-json/>.
-- Importer-Plugin: [`public/wp-content/plugins/naturlust-importer/`](public/wp-content/plugins/naturlust-importer/).
-  Aktiviert das WP-CLI-Kommando `wp naturlust import [--only=…]`,
-  läuft idempotent über die Origin-IDs der Quell-Site und legt Medien
-  via `media_handle_sideload` lokal an.
-- Aktueller Status: Der Live-Hoster (webgo.de) blockt offenbar Anfragen
-  aus dem Entwicklungsnetz, deshalb arbeiten wir lokal mit Demo-
-  Inhalten. Plugin bleibt installiert, aber deaktiviert; sobald der
-  Hoster wieder erreichbar ist, lässt sich der Import phasenweise
-  starten:
+- Die lokale Installation ist eine vollständige Wiederherstellung der
+  Live-Site aus einem UpdraftPlus-Backup: WordPress-Core (`de_DE`),
+  DB-Dump (Präfix `gowp_`), Uploads, Drittanbieter-Themes und -Plugins.
+  Beim Restore wurden die URLs per `wp search-replace` von
+  `naturlust.net` auf `naturlust.ddev.site` umgeschrieben.
+- Reale Struktur (für Theme-Arbeit relevant):
+  - Kategorien: `wandern`, `radfahren`, `naturfotografie` (Label
+    „Fotografie"), `waldbaden`, dazu `tagebuch` und `allgemein`.
+    Achtung: Fotografie hat den Slug `naturfotografie`, nicht
+    `fotografieren`.
+  - Menü-Seiten: `ueber-uns`, `videos`, `naturlust-wallpapers`,
+    `veranstaltungskalender`, `kontaktformular`,
+    `datenschutzerklaerung`, `impressum`.
+  - Kategorie-Archive liegen unter `/<slug>/` (Permalink-Struktur
+    `/%category%/%postname%/`); im Theme deshalb `get_term_link()`
+    statt fester `/category/…`-Pfade nutzen.
+- Frische DB neu einspielen (z. B. aus neuem Backup-Dump):
   ```bash
-  ddev wp plugin activate naturlust-importer
-  ddev wp naturlust import --only=terms
-  ddev wp naturlust import --only=media
-  ddev wp naturlust import --only=posts
-  ddev wp naturlust import --only=pages
+  ddev import-db --file=<dump.sql>
+  ddev wp search-replace 'https://naturlust.net' 'https://naturlust.ddev.site' --all-tables --precise
   ```
-- Beim Import gilt: IDs nicht erzwingen, stattdessen über Slug
-  abgleichen, damit Mehrfach-Importe idempotent sind.
+- Alternativer Importweg (REST-API) liegt brach: Das Plugin
+  [`naturlust-importer`](public/wp-content/plugins/naturlust-importer/)
+  (`wp naturlust import [--only=…]`, idempotent über Origin-IDs) bleibt
+  installiert, aber deaktiviert, da der Live-Hoster (webgo.de) Anfragen
+  aus dem Entwicklungsnetz blockt.
 
 ### Codequalität
 
