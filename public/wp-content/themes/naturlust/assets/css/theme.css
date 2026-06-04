@@ -630,7 +630,10 @@ body.naturlust-nav-open {
 /*  Schriftgrösse-Umschalter (Plugin „font-resizer") – +/- Buttons      */
 /*  ans Design angepasst; grelle Inline-Icon-Farbe wird übersteuert.    */
 /* ------------------------------------------------------------------ */
-.fsc_text {
+/* Wichtig: .fsc_text umschliesst den GESAMTEN Beitragsinhalt (damit das
+   Plugin die Schriftgrösse ändern kann) – hier NICHT zentrieren, sonst
+   wird der ganze Text zentriert. Nur der Button-Wrapper wird zentriert. */
+.fsc_wrapper {
   text-align: center;
   margin: 0 0 1.5rem;
 }
