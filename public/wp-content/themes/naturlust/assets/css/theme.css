@@ -409,3 +409,55 @@ body.naturlust-nav-open {
     justify-content: center;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/*  Dark Mode – folgt automatisch der System-Einstellung               */
+/*  (prefers-color-scheme: dark). Kein Plugin, kein Umschalter.        */
+/*                                                                     */
+/*  Strategie: Nur die „Tinte" (Text) wird hell und Hintergrund/Karte  */
+/*  werden verdunkelt. Pergament (Footer-Text, Button-Text), Grün und  */
+/*  die Wald-Silhouette bleiben unverändert – ein simples Umkehren der */
+/*  paper/ink-Token würde sonst den hellen Footer-Text zerstören.      */
+/* ------------------------------------------------------------------ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wp--preset--color--ink: #ece4d2;      /* Text wird hell */
+    --wp--preset--color--ink-soft: #aab3a4; /* gedämpfter heller Ton */
+  }
+
+  /* Seitenhintergrund dunkel, die Karte als dezente Textur darunter. */
+  body {
+    background-color: #19211d;
+    background-image:
+      linear-gradient(rgba(13, 18, 15, 0.82), rgba(13, 18, 15, 0.9)),
+      url(../images/brand/map-background.jpg);
+  }
+
+  /* Menü-Overlay ebenfalls dunkel. */
+  .naturlust-nav__overlay {
+    background-color: #19211d;
+    background-image:
+      linear-gradient(rgba(13, 18, 15, 0.86), rgba(13, 18, 15, 0.92)),
+      url(../images/brand/map-background.jpg);
+  }
+
+  /* Hover-Flächen der Icon-Buttons auf Dunkel sichtbar halten. */
+  .naturlust-nav__toggle:hover,
+  .naturlust-nav__toggle:focus-visible,
+  .naturlust-nav__close:hover,
+  .naturlust-nav__close:focus-visible {
+    background: rgba(236, 228, 210, 0.14);
+  }
+
+  /* Fliesstext-Links heller grün (das dunkle Forest-Grün hätte auf
+     dunklem Grund zu wenig Kontrast). Menü- und Footer-Links bleiben
+     über ihre eigenen Regeln hell. */
+  .wp-block-post-content a:not(.wp-element-button) {
+    color: #8fbf83;
+  }
+
+  .wp-block-post-content a:not(.wp-element-button):hover,
+  .wp-block-post-content a:not(.wp-element-button):focus-visible {
+    color: #b6d8ac;
+  }
+}
