@@ -56,6 +56,7 @@
 	flex-direction: column;
 	gap: 0.2rem;
 	padding: clamp(1rem, 3vw, 2rem);
+	color: #fff; /* feste Textfarbe – erbt nicht die Link-Hover-Farbe des Themes */
 	/* Grünlicher Milchglas-Effekt: translucent Tannengrün + Weichzeichner.
 	   Fallback (ohne backdrop-filter) ist die grüne Fläche selbst. */
 	background: linear-gradient(to top, rgba(26, 47, 29, 0.66), rgba(26, 47, 29, 0.44));
