@@ -86,8 +86,8 @@ body:not(.home) .naturlust-header .wp-block-site-title {
   display: none;
 }
 
-/* Slogan auf Unterseiten grösser, fett und aufrecht für bessere Lesbarkeit. */
-body:not(.home) .naturlust-header__center .wp-block-site-tagline {
+/* Slogan überall (Start- wie Unterseiten) grösser, fett und aufrecht. */
+.naturlust-header__center .wp-block-site-tagline {
   margin-top: 0.5rem;
   font-style: normal !important;
   font-weight: 700;
