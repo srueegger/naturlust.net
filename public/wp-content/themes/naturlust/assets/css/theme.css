@@ -109,8 +109,8 @@ body:not(.home) .naturlust-header__center .wp-block-site-tagline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   padding: 0;
   border: none;
   border-radius: 4px;
@@ -145,16 +145,19 @@ body.naturlust-nav-open {
   overflow: hidden;
 }
 
-/* Close-Button: oben rechts, über dem Inhalt und sicher klickbar. */
+/* Close-Button: oben links – an derselben Stelle wie der Hamburger,
+   gleiche Grösse, über dem Inhalt und sicher klickbar. */
 .naturlust-nav__close {
   position: absolute;
   top: clamp(0.9rem, 1.4vw, 1.4rem);
-  right: var(--naturlust-page-padding);
+  left: var(--naturlust-page-padding);
   z-index: 10;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
   border: none;
   border-radius: 4px;
   background: transparent;
@@ -365,61 +368,31 @@ body.naturlust-nav-open {
   }
 }
 
-/* --- Footer: Wald-Silhouette über dem Map-Hintergrund --------------- */
-/*                                                                     */
-/*  Kein eigener Footer-Block. Die Map zieht durch bis zum Seitenfuß,  */
-/*  die Wald-Silhouette liegt als transparente PNG-Auflage darüber.    */
-/*  Das Menü und das Copyright stehen IN der schwarz gefüllten         */
-/*  Wald-Fläche der Silhouette.                                        */
+/* --- Footer: klassischer, zentrierter Band unter dem Inhalt ---------- */
+/*  Die Wald-Silhouette wurde entfernt. Der Footer ist ein normaler      */
+/*  Vollbreite-Streifen mit fester Farbe (unabhängig vom Light/Dark-      */
+/*  Token-Tausch), Links und Copyright zentriert.                        */
 
 .naturlust-footer {
-  position: relative;
-  margin: 0;
-  padding-top: clamp(140px, 18vw, 280px);
-  padding-bottom: clamp(0.75rem, 1.8vw, 1.5rem);
-  padding-left: clamp(1.5rem, 4vw, 3rem);
-  padding-right: clamp(1.5rem, 4vw, 3rem);
-  background-color: transparent;
-  background-image: url(../images/brand/footer-silhouette.png);
-  background-repeat: no-repeat;
-  background-position: bottom right;
-  background-size: 130% auto;
-  color: var(--wp--preset--color--paper);
+  margin-top: clamp(2.5rem, 6vw, 5rem);
+  padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.5rem, 4vw, 3rem);
+  background-color: #243d28;
+  color: #ece4d2;
 }
 
-@media (max-width: 800px) {
-  .naturlust-footer {
-    background-size: 200% auto;
-    padding-top: clamp(110px, 28vw, 220px);
-  }
+.naturlust-footer__inner {
+  align-items: center;
+  text-align: center;
 }
 
-.naturlust-footer__grid {
-  display: flex;
-  align-items: flex-end;
-  gap: 1rem;
-  width: 100%;
-}
-
-.naturlust-footer__start {
-  margin-left: clamp(3rem, 30vw, 30rem); /* schiebt Nav in die dunkle Waldfläche */
-  flex-shrink: 0;
-}
-
-.naturlust-footer__end {
-  margin-left: auto; /* Copyright an den rechten Rand */
-  flex-shrink: 0;
-  text-align: right;
-}
-
-/* Nav-Items im Footer immer einzeilig */
-.naturlust-footer .wp-block-navigation .wp-block-navigation__container {
-  flex-wrap: nowrap;
+.naturlust-footer__nav .wp-block-navigation__container {
+  justify-content: center;
+  flex-wrap: wrap;
   gap: clamp(0.75rem, 1.5vw, 1.5rem);
 }
 
 .naturlust-footer .wp-block-navigation a {
-  color: var(--wp--preset--color--paper);
+  color: #ece4d2;
   opacity: 0.9;
   text-decoration: none;
 }
@@ -432,29 +405,48 @@ body.naturlust-nav-open {
 
 .naturlust-copy {
   margin: 0;
-  opacity: 0.85;
+  font-size: 0.85rem;
+  opacity: 0.8;
 }
 
-@media (max-width: 900px) {
-  /* Footer stapelt vertikal und zentriert: das grosse Einzug-Margin und
-     das nowrap der Desktop-Ansicht würden auf schmalen Viewports über
-     den Bildschirmrand hinauslaufen. */
-  .naturlust-footer__grid {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.75rem;
-  }
-  .naturlust-footer__start {
-    margin-left: 0;
-  }
-  .naturlust-footer__end {
-    margin-left: 0;
-    text-align: center;
-  }
-  .naturlust-footer .wp-block-navigation .wp-block-navigation__container {
-    flex-wrap: wrap;
-    justify-content: center;
+/* --- „Nach oben"-Button: fix unten rechts, erscheint beim Scrollen ---- */
+.naturlust-top {
+  position: fixed;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background-color: #2c4a2f;
+  color: #f7f1e3;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 200ms ease, transform 200ms ease, visibility 200ms, background-color 150ms ease;
+}
+
+.naturlust-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.naturlust-top:hover,
+.naturlust-top:focus-visible {
+  background-color: #1a2f1d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .naturlust-top {
+    transition: opacity 200ms ease, visibility 200ms;
+    transform: none;
   }
 }
 

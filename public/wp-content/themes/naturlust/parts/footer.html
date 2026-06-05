@@ -1,28 +1,28 @@
-<!-- wp:group {"tagName":"footer","align":"full","textColor":"paper","className":"naturlust-footer","style":{"spacing":{"padding":{"left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}},"layout":{"type":"constrained"}} -->
-<footer class="wp-block-group alignfull naturlust-footer has-paper-color has-text-color" style="padding-right:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">
+<!-- wp:group {"tagName":"footer","align":"full","className":"naturlust-footer","layout":{"type":"constrained"}} -->
+<footer class="wp-block-group alignfull naturlust-footer">
 
-	<!-- wp:group {"className":"naturlust-footer__grid","layout":{"type":"default"}} -->
-	<div class="wp-block-group naturlust-footer__grid">
+	<!-- wp:group {"className":"naturlust-footer__inner","layout":{"type":"flex","orientation":"vertical","justifyContent":"center"},"style":{"spacing":{"blockGap":"0.75rem"}}} -->
+	<div class="wp-block-group naturlust-footer__inner">
 
-		<!-- wp:group {"className":"naturlust-footer__start","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"flex-start"},"style":{"spacing":{"blockGap":"var:preset|spacing|30"}}} -->
-		<div class="wp-block-group naturlust-footer__start">
-			<!-- wp:navigation {"textColor":"paper","overlayMenu":"never","layout":{"type":"flex","justifyContent":"flex-start","flexWrap":"wrap"},"style":{"typography":{"fontSize":"0.9rem"}}} -->
-				<!-- wp:navigation-link {"label":"über uns","url":"/ueber-uns/","kind":"custom","isTopLevelLink":true} /-->
-				<!-- wp:navigation-link {"label":"Kontaktformular","url":"/kontaktformular/","kind":"custom","isTopLevelLink":true} /-->
-				<!-- wp:navigation-link {"label":"Datenschutzerklärung","url":"/datenschutzerklaerung/","kind":"custom","isTopLevelLink":true} /-->
-				<!-- wp:navigation-link {"label":"Impressum","url":"/impressum/","kind":"custom","isTopLevelLink":true} /-->
-			<!-- /wp:navigation -->
-		</div>
-		<!-- /wp:group -->
+		<!-- wp:navigation {"overlayMenu":"never","className":"naturlust-footer__nav","layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"},"style":{"typography":{"fontSize":"0.9rem"}}} -->
+			<!-- wp:navigation-link {"label":"über uns","url":"/ueber-uns/","kind":"custom","isTopLevelLink":true} /-->
+			<!-- wp:navigation-link {"label":"Kontaktformular","url":"/kontaktformular/","kind":"custom","isTopLevelLink":true} /-->
+			<!-- wp:navigation-link {"label":"Datenschutzerklärung","url":"/datenschutzerklaerung/","kind":"custom","isTopLevelLink":true} /-->
+			<!-- wp:navigation-link {"label":"Impressum","url":"/impressum/","kind":"custom","isTopLevelLink":true} /-->
+		<!-- /wp:navigation -->
 
-		<!-- wp:group {"className":"naturlust-footer__end","layout":{"type":"flex","justifyContent":"flex-end","flexWrap":"wrap"}} -->
-		<div class="wp-block-group naturlust-footer__end">
-			<!-- wp:pattern {"slug":"naturlust/footer-copy"} /-->
-		</div>
-		<!-- /wp:group -->
+		<!-- wp:pattern {"slug":"naturlust/footer-copy"} /-->
 
 	</div>
 	<!-- /wp:group -->
 
 </footer>
 <!-- /wp:group -->
+
+<!-- wp:html -->
+<button type="button" class="naturlust-top" aria-label="Nach oben">
+	<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+		<path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+	</svg>
+</button>
+<!-- /wp:html -->

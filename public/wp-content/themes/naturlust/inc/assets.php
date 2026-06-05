@@ -56,6 +56,23 @@ add_action(
 				)
 			);
 		}
+
+		// „Nach oben"-Button.
+		$top_path = NATURLUST_DIR . 'assets/js/back-to-top.js';
+		$top_uri  = NATURLUST_URI . 'assets/js/back-to-top.js';
+
+		if ( file_exists( $top_path ) ) {
+			wp_enqueue_script(
+				'naturlust-back-to-top',
+				$top_uri,
+				array(),
+				naturlust_asset_version( $top_path ),
+				array(
+					'strategy'  => 'defer',
+					'in_footer' => true,
+				)
+			);
+		}
 	}
 );
 
