@@ -1,0 +1,140 @@
+/* ------------------------------------------------------------------ */
+/*  Naturlust Tagebuch-Slider – Front- und Editor-Styles                */
+/*  Farben greifen auf die Theme-Tokens zu (mit Fallbacks), Caption-     */
+/*  Text liegt über dem Bild und ist in Light & Dark gut lesbar.        */
+/* ------------------------------------------------------------------ */
+
+.naturlust-slider {
+	position: relative;
+	width: min(92%, 880px);
+	margin-inline: auto;
+}
+
+.naturlust-slider__viewport {
+	overflow: hidden;
+	border-radius: 14px;
+}
+
+.naturlust-slider__track {
+	display: flex;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	transition: transform 550ms ease;
+}
+
+.naturlust-slider__slide {
+	flex: 0 0 100%;
+	min-width: 0;
+	margin: 0;
+}
+
+.naturlust-slider__link {
+	position: relative;
+	display: block;
+	color: #fff;
+	text-decoration: none;
+}
+
+.naturlust-slider__img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+}
+
+.naturlust-slider__img--empty {
+	background: linear-gradient(135deg, #3d4a3f, #1a2f1d);
+}
+
+.naturlust-slider__caption {
+	position: absolute;
+	inset-inline: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+	padding: clamp(1rem, 3vw, 2rem);
+	background: linear-gradient(to top, rgba(15, 20, 15, 0.8), rgba(15, 20, 15, 0.15) 60%, rgba(15, 20, 15, 0));
+}
+
+.naturlust-slider__date {
+	font-size: 0.85rem;
+	letter-spacing: 0.03em;
+	opacity: 0.9;
+}
+
+.naturlust-slider__title {
+	font-family: var(--wp--preset--font-family--serif, Georgia, "Times New Roman", serif);
+	font-size: clamp(1.25rem, 1rem + 1.6vw, 2.1rem);
+	font-weight: 600;
+	line-height: 1.15;
+}
+
+.naturlust-slider__link:hover .naturlust-slider__title,
+.naturlust-slider__link:focus-visible .naturlust-slider__title {
+	text-decoration: underline;
+}
+
+/* Pfeile */
+.naturlust-slider__nav {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	border: none;
+	border-radius: 50%;
+	background: rgba(15, 20, 15, 0.45);
+	color: #fff;
+	cursor: pointer;
+	transition: background-color 150ms ease;
+}
+
+.naturlust-slider__nav:hover,
+.naturlust-slider__nav:focus-visible {
+	background: rgba(15, 20, 15, 0.72);
+}
+
+.naturlust-slider__nav--prev {
+	left: clamp(0.5rem, 2vw, 1rem);
+}
+
+.naturlust-slider__nav--next {
+	right: clamp(0.5rem, 2vw, 1rem);
+}
+
+/* Punkte */
+.naturlust-slider__dots {
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+	margin-top: 1rem;
+}
+
+.naturlust-slider__dot {
+	width: 11px;
+	height: 11px;
+	padding: 0;
+	border: none;
+	border-radius: 50%;
+	background: var(--wp--preset--color--ink-soft, #3d4a3f);
+	opacity: 0.35;
+	cursor: pointer;
+	transition: opacity 150ms ease, background-color 150ms ease;
+}
+
+.naturlust-slider__dot[aria-selected="true"] {
+	opacity: 1;
+	background: var(--wp--preset--color--forest, #2c4a2f);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.naturlust-slider__track {
+		transition: none;
+	}
+}
