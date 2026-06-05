@@ -140,6 +140,20 @@ body:not(.home) .naturlust-header__center .wp-block-site-tagline {
   display: none;
 }
 
+/* Eingeloggt schiebt die WordPress-Adminbar den Header (und damit den
+   Hamburger) nach unten. Das Overlay ist position:fixed und würde die
+   Adminbar ignorieren – dadurch sässe das Schliessen-X höher als der
+   Hamburger. Wir lassen das Overlay deshalb unter der Adminbar beginnen. */
+.admin-bar .naturlust-nav__overlay {
+  top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+  .admin-bar .naturlust-nav__overlay {
+    top: 46px;
+  }
+}
+
 /* Scroll-Sperre, solange das Menü offen ist. */
 body.naturlust-nav-open {
   overflow: hidden;
