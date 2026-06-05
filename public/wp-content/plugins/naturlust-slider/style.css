@@ -56,7 +56,11 @@
 	flex-direction: column;
 	gap: 0.2rem;
 	padding: clamp(1rem, 3vw, 2rem);
-	background: linear-gradient(to top, rgba(15, 20, 15, 0.8), rgba(15, 20, 15, 0.15) 60%, rgba(15, 20, 15, 0));
+	/* Grünlicher Milchglas-Effekt: translucent Tannengrün + Weichzeichner.
+	   Fallback (ohne backdrop-filter) ist die grüne Fläche selbst. */
+	background: linear-gradient(to top, rgba(26, 47, 29, 0.66), rgba(26, 47, 29, 0.44));
+	-webkit-backdrop-filter: blur(9px) saturate(125%);
+	backdrop-filter: blur(9px) saturate(125%);
 }
 
 .naturlust-slider__date {
@@ -72,10 +76,7 @@
 	line-height: 1.15;
 }
 
-.naturlust-slider__link:hover .naturlust-slider__title,
-.naturlust-slider__link:focus-visible .naturlust-slider__title {
-	text-decoration: underline;
-}
+/* Titel ändert bei Hover bewusst weder Farbe noch Unterstreichung. */
 
 /* Pfeile */
 .naturlust-slider__nav {

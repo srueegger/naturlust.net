@@ -9,7 +9,6 @@
 	'use strict';
 
 	var INTERVAL = 6000;
-	var reduceMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
 
 	function initSlider( root ) {
 		var track = root.querySelector( '.naturlust-slider__track' );
@@ -59,7 +58,7 @@
 		}
 
 		function startAutoplay() {
-			if ( reduceMotion || timer ) {
+			if ( timer ) {
 				return;
 			}
 			timer = window.setInterval( function () {
