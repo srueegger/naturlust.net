@@ -749,3 +749,56 @@ body.naturlust-nav-open {
     color: #19211d !important;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/*  The Events Calendar – Einbindung ins Naturlust-Design              */
+/*                                                                     */
+/*  Zwei Anpassungen:                                                  */
+/*  1) Die Einzel-Event-Seite rendert TEC über ein eigenes Template    */
+/*     (.tribe-events-pg-template) statt unser single.html – dadurch   */
+/*     fehlt das „Blatt". Wir geben dem TEC-Wrapper dieselbe Surface    */
+/*     wie normalen Text-Seiten, damit der Inhalt vor der Kartengrafik  */
+/*     lesbar auf braunem Grund sitzt.                                  */
+/*  2) TEC setzt seine Textfarben über --tec-color-*-Variablen auf      */
+/*     :root (dunkles Navy). Im Dark Mode überschreiben wir nur diese   */
+/*     Tinte-Töne auf hell – der goldene Akzent (Links, „kostenlos")    */
+/*     bleibt unverändert.                                              */
+/* ------------------------------------------------------------------ */
+
+/* (1) Einzel-Event bekommt dasselbe Blatt wie .naturlust-surface. */
+.single-tribe_events #tribe-events-pg-template {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin-block: clamp(1.5rem, 4vw, 3rem);
+  margin-inline: auto;
+  padding: clamp(1.5rem, 5vw, 3.25rem) clamp(1.25rem, 4vw, 2.75rem);
+  background-color: #eae4dc;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(31, 42, 35, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  /* (2) TEC-Textfarben folgen im Dark Mode der hellen Tinte. Nur die
+     neutralen Text-Töne werden getauscht; Akzent-/Link-Akzentfarbe
+     (Gold) bleibt erhalten.
+
+     TEC definiert diese Variablen auf :root. Wir setzen sie bewusst auf
+     die TEC-Container statt auf :root: als nähere Vorfahren der Texte
+     gewinnen sie per Vererbung – unabhängig davon, ob TECs Stylesheet
+     nach unserem geladen wird. */
+  .tribe-common,
+  .tribe-events,
+  .tribe-events-pg-template {
+    --tec-color-text-primary: #ece4d2;
+    --tec-color-text-secondary: #c1baac;
+    --tec-color-text-event-title: #ece4d2;
+    --tec-color-link-primary: #ece4d2;
+  }
+
+  /* (1) Blatt im Dark Mode dunkel – analog zu .naturlust-surface. */
+  .single-tribe_events #tribe-events-pg-template {
+    background-color: #534e4b;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+}
