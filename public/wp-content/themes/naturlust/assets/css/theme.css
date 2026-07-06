@@ -943,6 +943,9 @@ body.naturlust-nav-open {
 .naturlust-related__placeholder {
   display: block;
   width: 100%;
+  /* height:auto überstimmt das height-Attribut des Bildes, sonst würde
+     aspect-ratio ignoriert (es greift nur, wenn eine Dimension auto ist). */
+  height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
 }
