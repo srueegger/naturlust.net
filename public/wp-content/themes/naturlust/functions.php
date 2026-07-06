@@ -24,3 +24,4 @@ if ( ! defined( 'NATURLUST_URI' ) ) {
 require_once NATURLUST_DIR . 'inc/setup.php';
 require_once NATURLUST_DIR . 'inc/assets.php';
 require_once NATURLUST_DIR . 'inc/shortcodes.php';
+require_once NATURLUST_DIR . 'inc/blocks.php';
