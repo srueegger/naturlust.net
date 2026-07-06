@@ -802,3 +802,209 @@ body.naturlust-nav-open {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
   }
 }
+
+/* ------------------------------------------------------------------ */
+/*  Beitragsnavigation (naturlust/post-nav): vorheriger/nächster        */
+/*  Beitrag als zwei Karten, unten links und unten rechts.              */
+/* ------------------------------------------------------------------ */
+.naturlust-postnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  margin-top: clamp(2rem, 5vw, 3rem);
+  padding-top: clamp(1.5rem, 4vw, 2rem);
+  border-top: 1px solid rgba(31, 42, 35, 0.14);
+}
+
+.naturlust-postnav--next-only {
+  justify-content: flex-end;
+}
+
+.naturlust-postnav__link {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex: 1 1 calc(50% - 1.25rem);
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0.9rem 1.1rem;
+  background-color: var(--wp--preset--color--paper);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(31, 42, 35, 0.08);
+  text-decoration: none;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.naturlust-postnav__link--next {
+  text-align: right;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.naturlust-postnav__link:hover,
+.naturlust-postnav__link:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(31, 42, 35, 0.16);
+}
+
+.naturlust-postnav__arrow {
+  flex: 0 0 auto;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--wp--preset--color--forest);
+}
+
+.naturlust-postnav__image {
+  flex: 0 0 auto;
+}
+
+.naturlust-postnav__image img {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.naturlust-postnav__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.naturlust-postnav__label {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--ink-soft);
+}
+
+.naturlust-postnav__title {
+  font-family: var(--wp--preset--font-family--serif);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  color: var(--wp--preset--color--ink);
+  /* Höchstens zwei Zeilen, dann Ellipsis. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Ähnliche Beiträge (naturlust/related-posts): Karten-Raster.         */
+/* ------------------------------------------------------------------ */
+.naturlust-related {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  padding-top: clamp(1.5rem, 4vw, 2rem);
+  border-top: 1px solid rgba(31, 42, 35, 0.14);
+}
+
+.naturlust-related__title {
+  margin: 0 0 clamp(1.25rem, 3vw, 1.75rem);
+  font-family: var(--wp--preset--font-family--serif);
+  font-size: var(--wp--preset--font-size--large);
+  color: var(--wp--preset--color--ink);
+}
+
+.naturlust-related__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.naturlust-related__card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--wp--preset--color--paper);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(31, 42, 35, 0.08);
+  text-decoration: none;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.naturlust-related__card:hover,
+.naturlust-related__card:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(31, 42, 35, 0.18);
+}
+
+.naturlust-related__image {
+  display: block;
+}
+
+.naturlust-related__image img,
+.naturlust-related__placeholder {
+  display: block;
+  width: 100%;
+  /* height:auto überstimmt das height-Attribut des Bildes, sonst würde
+     aspect-ratio ignoriert (es greift nur, wenn eine Dimension auto ist). */
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.naturlust-related__placeholder {
+  background:
+    linear-gradient(135deg, var(--wp--preset--color--paper-shadow), var(--wp--preset--color--sand));
+}
+
+.naturlust-related__name {
+  padding: 0.9rem 1rem 0;
+  font-family: var(--wp--preset--font-family--serif);
+  font-size: 1.1rem;
+  line-height: 1.25;
+  color: var(--wp--preset--color--ink);
+}
+
+.naturlust-related__date {
+  padding: 0.35rem 1rem 1rem;
+  font-size: 0.85rem;
+  color: var(--wp--preset--color--ink-soft);
+}
+
+/* Responsive: Tablet zwei Spalten, Smartphone eine Spalte. */
+@media (max-width: 900px) {
+  .naturlust-related__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .naturlust-postnav__link {
+    flex: 1 1 100%;
+  }
+
+  .naturlust-related__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Dark Mode – Karten für Beitragsnavigation & Ähnliche Beiträge.      */
+/* ------------------------------------------------------------------ */
+@media (prefers-color-scheme: dark) {
+  .naturlust-postnav,
+  .naturlust-related {
+    border-top-color: rgba(236, 228, 210, 0.16);
+  }
+
+  .naturlust-postnav__link,
+  .naturlust-related__card {
+    background-color: #423e3b;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
+  }
+
+  .naturlust-postnav__link:hover,
+  .naturlust-postnav__link:focus-visible,
+  .naturlust-related__card:hover,
+  .naturlust-related__card:focus-visible {
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+  }
+}
