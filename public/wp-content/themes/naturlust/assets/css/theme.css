@@ -754,19 +754,23 @@ body.naturlust-nav-open {
 /*  The Events Calendar – Einbindung ins Naturlust-Design              */
 /*                                                                     */
 /*  Zwei Anpassungen:                                                  */
-/*  1) Die Einzel-Event-Seite rendert TEC über ein eigenes Template    */
-/*     (.tribe-events-pg-template) statt unser single.html – dadurch   */
-/*     fehlt das „Blatt". Wir geben dem TEC-Wrapper dieselbe Surface    */
-/*     wie normalen Text-Seiten, damit der Inhalt vor der Kartengrafik  */
-/*     lesbar auf braunem Grund sitzt.                                  */
+/*  1) Sämtliche TEC-Seiten (Einzel-Event sowie die Kalender-Ansichten  */
+/*     Liste/Monat/Tag unter /veranstaltungen/) rendern über eigene     */
+/*     Templates statt unser single.html/archive.html – dadurch fehlt   */
+/*     das „Blatt". Wir geben ihren Wrappern dieselbe Surface wie        */
+/*     normalen Text-Seiten, damit der Inhalt vor der Kartengrafik       */
+/*     lesbar auf braunem Grund sitzt.                                   */
 /*  2) TEC setzt seine Textfarben über --tec-color-*-Variablen auf      */
 /*     :root (dunkles Navy). Im Dark Mode überschreiben wir nur diese   */
 /*     Tinte-Töne auf hell – der goldene Akzent (Links, „kostenlos")    */
 /*     bleibt unverändert.                                              */
 /* ------------------------------------------------------------------ */
 
-/* (1) Einzel-Event bekommt dasselbe Blatt wie .naturlust-surface. */
-.single-tribe_events #tribe-events-pg-template {
+/* (1) TEC-Seiten bekommen dasselbe Blatt wie .naturlust-surface:
+   - Einzel-Event: Wrapper #tribe-events-pg-template
+   - Archiv-Views (Liste/Monat/Tag): Block .tec-block__archive-events */
+.single-tribe_events #tribe-events-pg-template,
+.post-type-archive-tribe_events .tec-block__archive-events {
   box-sizing: border-box;
   width: 100%;
   max-width: 1200px;
@@ -786,18 +790,47 @@ body.naturlust-nav-open {
      TEC definiert diese Variablen auf :root. Wir setzen sie bewusst auf
      die TEC-Container statt auf :root: als nähere Vorfahren der Texte
      gewinnen sie per Vererbung – unabhängig davon, ob TECs Stylesheet
-     nach unserem geladen wird. */
+     nach unserem geladen wird.
+
+     Wichtig: TEC leitet viele Farben über Ketten wie
+     --…-event-title-list: var(--…-text-primary) ab – aber ALLE auf :root.
+     Solche abgeleiteten Variablen werden bereits auf :root zum dunklen
+     Default „eingefroren" und folgen einem späteren primary-Override auf
+     einem Nachfahren NICHT mehr. Deshalb überschreiben wir zusätzlich die
+     konkret verwendeten Leaf-Variablen der Kalender-Ansichten direkt mit
+     Hellwerten. Bewusst NICHT dabei: die Multiday-Balken im Monat
+     (…-events-title-month-multiday) – die liegen auf hellem Grund und
+     müssen ihren dunklen Text behalten. */
   .tribe-common,
   .tribe-events,
-  .tribe-events-pg-template {
+  .tribe-events-pg-template,
+  .tec-block__archive-events {
     --tec-color-text-primary: #ece4d2;
     --tec-color-text-secondary: #c1baac;
     --tec-color-text-event-title: #ece4d2;
     --tec-color-link-primary: #ece4d2;
+
+    /* Kalender-Views (Liste/Tag): Titel, Datum/Zeit auf dem Blatt.
+       Der Titel-Link nutzt die Basis-Variable --…-events-title; die
+       Monats-Multiday-Balken leiten davon ab, bleiben aber auf :root
+       eingefroren und damit dunkel auf hellem Grund (gewollt). */
+    --tec-color-text-events-title: #ece4d2;
+    --tec-color-text-event-title-list: #ece4d2;
+    --tec-color-text-events-title-day: #ece4d2;
+    --tec-color-text-events-title-latest-past: #ece4d2;
+    --tec-color-text-event-date: #ece4d2;
+    --tec-color-text-secondary-event-date: #c1baac;
+
+    /* Monats-Grid: Tageszahlen + Wochentags-Kürzel. */
+    --tec-color-day-marker-month: #ece4d2;
+    --tec-color-day-marker-past-month: #a89f8f;
+    --tec-color-text-day-of-week-month: #c1baac;
+    --tec-color-text-day-of-week-week: #c1baac;
   }
 
   /* (1) Blatt im Dark Mode dunkel – analog zu .naturlust-surface. */
-  .single-tribe_events #tribe-events-pg-template {
+  .single-tribe_events #tribe-events-pg-template,
+  .post-type-archive-tribe_events .tec-block__archive-events {
     background-color: #534e4b;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
   }
