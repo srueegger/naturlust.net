@@ -256,6 +256,159 @@ body.naturlust-nav-open {
   opacity: 1;
 }
 
+/* Such-Anker oben rechts: Lupen-Icon, gespiegelt zum Hamburger. Beim     */
+/* Klick öffnet ein Vollbild-Overlay mit Suchfeld (Pattern              */
+/* naturlust/search, Steuerung assets/js/search.js). Optik bewusst       */
+/* identisch zum Hamburger-Overlay.                                      */
+
+.naturlust-search__toggle {
+  position: absolute;
+  top: clamp(0.9rem, 1.4vw, 1.4rem);
+  right: var(--naturlust-page-padding);
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--wp--preset--color--ink);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.naturlust-search__toggle:hover,
+.naturlust-search__toggle:focus-visible {
+  background: rgba(31, 42, 35, 0.08);
+}
+
+/* Vollbild-Overlay (gleicher Pergament-Hintergrund wie das Menü). */
+.naturlust-search__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #eae4dc;
+}
+
+.naturlust-search__overlay[hidden] {
+  display: none;
+}
+
+/* Eingeloggt: Overlay unter der Adminbar beginnen (wie beim Menü). */
+.admin-bar .naturlust-search__overlay {
+  top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+  .admin-bar .naturlust-search__overlay {
+    top: 46px;
+  }
+}
+
+/* Scroll-Sperre, solange die Suche offen ist. */
+body.naturlust-search-open {
+  overflow: hidden;
+}
+
+/* Close-Button oben rechts – an derselben Stelle wie die Lupe. */
+.naturlust-search__close {
+  position: absolute;
+  top: clamp(0.9rem, 1.4vw, 1.4rem);
+  right: var(--naturlust-page-padding);
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--wp--preset--color--ink);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.naturlust-search__close:hover,
+.naturlust-search__close:focus-visible {
+  background: rgba(31, 42, 35, 0.08);
+}
+
+/* Suchformular: zentriert, grosszügig, mit Unterstrich-Feld. */
+.naturlust-search__form {
+  width: min(92vw, 640px);
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+.naturlust-search__label {
+  display: block;
+  text-align: center;
+  font-family: var(--wp--preset--font-family--serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 0.9rem + 1vw, 1.6rem);
+  color: var(--wp--preset--color--ink);
+  opacity: 0.8;
+  margin-bottom: clamp(1rem, 3vh, 1.75rem);
+}
+
+.naturlust-search__field-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 2px solid var(--wp--preset--color--ink);
+}
+
+.naturlust-search__field {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  padding: 0.5rem 0.25rem;
+  font-family: var(--wp--preset--font-family--serif);
+  font-size: clamp(1.4rem, 1rem + 2vw, 2.2rem);
+  color: var(--wp--preset--color--ink);
+  line-height: 1.3;
+}
+
+.naturlust-search__field:focus {
+  outline: none;
+}
+
+.naturlust-search__field::placeholder {
+  color: var(--wp--preset--color--ink-soft);
+  opacity: 0.55;
+}
+
+.naturlust-search__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--wp--preset--color--forest);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.naturlust-search__submit:hover,
+.naturlust-search__submit:focus-visible {
+  background: rgba(31, 42, 35, 0.08);
+}
+
 /* --- Site-Stempel: rundes Logo links neben dem Hero, schwebend ------ */
 /*                                                                     */
 /*  position:relative auf dem post-content macht den Inhalt zur        */
@@ -494,11 +647,26 @@ body.naturlust-nav-open {
     background-color: #534e4b;
   }
 
+  /* Such-Overlay im selben dunklen Surface-Ton wie das Menü. */
+  .naturlust-search__overlay {
+    background-color: #534e4b;
+  }
+
+  .naturlust-search__field-wrap {
+    border-bottom-color: var(--wp--preset--color--ink);
+  }
+
   /* Hover-Flächen der Icon-Buttons auf Dunkel sichtbar halten. */
   .naturlust-nav__toggle:hover,
   .naturlust-nav__toggle:focus-visible,
   .naturlust-nav__close:hover,
-  .naturlust-nav__close:focus-visible {
+  .naturlust-nav__close:focus-visible,
+  .naturlust-search__toggle:hover,
+  .naturlust-search__toggle:focus-visible,
+  .naturlust-search__close:hover,
+  .naturlust-search__close:focus-visible,
+  .naturlust-search__submit:hover,
+  .naturlust-search__submit:focus-visible {
     background: rgba(236, 228, 210, 0.14);
   }
 

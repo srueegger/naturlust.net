@@ -57,6 +57,23 @@ add_action(
 			);
 		}
 
+		// Such-Overlay-Steuerung (Pattern naturlust/search).
+		$search_path = NATURLUST_DIR . 'assets/js/search.js';
+		$search_uri  = NATURLUST_URI . 'assets/js/search.js';
+
+		if ( file_exists( $search_path ) ) {
+			wp_enqueue_script(
+				'naturlust-search',
+				$search_uri,
+				array(),
+				naturlust_asset_version( $search_path ),
+				array(
+					'strategy'  => 'defer',
+					'in_footer' => true,
+				)
+			);
+		}
+
 		// „Nach oben"-Button.
 		$top_path = NATURLUST_DIR . 'assets/js/back-to-top.js';
 		$top_uri  = NATURLUST_URI . 'assets/js/back-to-top.js';
